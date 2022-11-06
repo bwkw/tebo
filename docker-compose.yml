@@ -1,0 +1,90 @@
+version: '3.8'  #composeファイルのバージョン（https://docs.docker.jp/compose/compose-file/compose-versioning.html）
+
+volumes:
+  php-fpm-socket:
+  db-store:  #コンテナを削除してもデータベースのデータが残るようにボリュームとして定義
+
+services:
+  app:
+    build:  #contextとdockerfileは両方指定したほうが良い（https://qiita.com/sam8helloworld/items/e7fffa9afc82aea68a7a）
+      context: .  #ビルドを実行する場所の設定
+      dockerfile: ./infra/docker/app/Dockerfile  #buildするDockerfileまでのパス
+    ports:
+      - target: 9000
+        published: 9000
+        protocol: tcp
+    volumes:  #マウント方法を指定する（https://docs.docker.jp/compose/compose-file/compose-file-v3.html#volumes）
+      - type: volume
+        source: php-fpm-socket
+        target: /var/run/php-fpm
+        volume:
+          nocopy: true
+      - type: bind
+        source: ./api
+        target: /app
+    environment:  #Laravelの.envよりもサーバー環境変数の値の方が優先されます
+      - DB_CONNECTION=mysql
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=${DB_NAME:-laravel}
+      - DB_USERNAME=${DB_USER:-phper}
+      - DB_PASSWORD=${DB_PASS:-secret}
+      - TZ=Asia/Tokyo
+
+  client:
+    build:
+      context: .
+      dockerfile: ./infra/docker/client/Dockerfile
+    ports:
+      - target: 3000
+        published: 3000
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: ./client
+        target: /client
+    tty: true
+    command:
+      sh -c "npm run dev"
+    environment:
+      - CHOKIDAR_USEPOLLING=true  # HotReload用
+
+  web:
+    build:
+      context: .
+      dockerfile: ./infra/docker/web/Dockerfile
+    ports:  #ポートを指定する（https://docs.docker.jp/compose/compose-file/compose-file-v3.html#id93）
+      - target: 80
+        published: 80
+        protocol: tcp
+        mode: host  #hostは各ノード上のホスト側ポートで公開。または、ingressは負荷分散されたポートで公開。
+    volumes:
+      - type: volume
+        source: php-fpm-socket
+        target: /var/run/php-fpm
+        volume:
+          nocopy: true  #ボリュームを作成しても、コンテナからのデータのコピーを無効にするフラグ
+      - type: bind
+        source: ./api
+        target: /app
+
+  db:
+    build:
+      context: .
+      dockerfile: ./infra/docker/db/Dockerfile
+    ports:
+      - target: 3306
+        published: 3306
+        protocol: tcp
+    volumes:
+      - type: volume
+        source: db-store
+        target: /var/lib/mysql
+        volume:
+          nocopy: true
+    environment:
+      - MYSQL_DATABASE=${DB_NAME:-laravel}
+      - MYSQL_USER=${DB_USER:-phper}
+      - MYSQL_PASSWORD=${DB_PASS:-secret}
+      - MYSQL_ROOT_PASSWORD=${DB_PASS:-secret}
+      - TZ='Asia/Tokyo'
