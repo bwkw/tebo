@@ -4,11 +4,11 @@ import { Button, Text } from '@nextui-org/react'
 
 import { ButtonType } from 'types/Button'
 
-export const ButtonSecondary: FC<ButtonType> = ({ text, url }) => {
+export const ButtonSecondary: FC<ButtonType> = (props) => {
   return (
     <Button flat auto rounded color='secondary'>
       <Text css={{ color: 'inherit' }} size={12} weight='bold' transform='uppercase'>
-        Notify Me
+        {props.text}
       </Text>
     </Button>
   )
