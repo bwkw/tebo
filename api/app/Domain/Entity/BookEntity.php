@@ -34,16 +34,16 @@ class BookEntity
         $this->publisherId = $publisherId;
     }
 
-    public function reconstructFromRepository(BookDto $dto): self
+    public function reconstructFromRepository(BookDto $bookDto): self
     {
         return new self(
-            $dto->id,
-            $dto->title,
-            $dto->imageUrl,
-            $dto->page,
-            $dto->publishedDate,
-            $dto->authorId,
-            $dto->publisherId
+            $bookDto->id,
+            $bookDto->title,
+            $bookDto->imageUrl,
+            $bookDto->page,
+            $bookDto->publishedDate,
+            $bookDto->authorId,
+            $bookDto->publisherId
         );
     }
 }
