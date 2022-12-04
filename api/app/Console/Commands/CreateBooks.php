@@ -41,16 +41,15 @@ class CreateBooks extends Command
                 $itBook = [];
                 $itBook['title'] = $result->volumeInfo->title;
                 $itBook['authors'] = $result->volumeInfo->authors ?? null;
-                $itBook['publisher'] = $result->publisher ?? null;
-                $itBook['publishedDate'] = $result->pulishedDate ?? null;
-                $itBook['description'] = $result->description ?? null;
+                $itBook['publisher'] = $result->volumeInfo->publisher ?? null;
+                $itBook['publishedDate'] = $result->volumeInfo->pulishedDate ?? null;
+                $itBook['description'] = $result->volumeInfo->description ?? null;
                 // S3に画像保存してそのURLを挿入する
-//                $imageUrl = $result->imageLinks->thumbnail;
+//                $imageUrl = $result->volumeInfo->imageLinks->thumbnail;
 //                $itBook['imageUrl'] = FIXME: S3のURL
                 $itBooks[] = $itBook;
             }
             sleep(2);
         }
     }
-
 }
