@@ -1,0 +1,32 @@
+# [:emoji:] [prefixに続く形でコミットの要約]
+
+# ==== Emoji ====
+# 🎉  :tada:         initial commit
+# 💢  :anger:        コンフリクト
+# 🐛  :bug:          バグ修正
+# 👍  :+1:           機能改善
+# ✨  :sparkles:     部分的な機能追加
+# 🚀  :rocket:       パフォーマンス改善
+# 👮  :cop:          セキュリティ関連の改善
+# 🎨  :art:          デザイン変更
+# 📝  :memo:         文言修正
+# 🚧  :construction: WIP
+# ♻️  :recycle:      リファクタリング
+# 🔥  :fire:         不要な機能・コード・コメントの削除
+# 💚  :green_heart:  テストやCIの修正・改善
+# 👕  :shirt:        Lintエラーの修正やコードスタイルの修正
+# 🆙  :up:           依存パッケージなどのアップデート
+# ⚙️  :gear:         設定周りの変更
+# 📚  :books:        ドキュメント整備
+
+# ==== Prefix ====
+# Add / Feat      　（機能・ファイルなどを）追加する
+# Implement       　（新しい機能などを）実装する
+# Fix             　（コードなどを）修正する
+# Improve         　（コードなどを）改善する
+# Refactor         　リファクタする
+# Update          　（パッケージやドキュメントなどを）更新する
+# Remove          　（ファイル名やコードを）除去する
+# Rename          　（ファイル名を）変更する
+# Move            　（AをBに）移動する
+# Change          　（AをBに）変更する
