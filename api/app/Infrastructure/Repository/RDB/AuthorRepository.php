@@ -2,24 +2,17 @@
 
 namespace App\Infrastructure\Repository\RDB;
 
-use App\Domain\DTO\AuthorDto;
+use App\Domain\Entity\AuthorEntity;
 use App\Domain\RepositoryInterface\AuthorRepositoryInterface;
 use App\Infrastructure\ORM\AuthorOrm;
 
 class AuthorRepository implements AuthorRepositoryInterface
 {
-    private AuthorOrm $authorOrm;
-
-    private function __construct(AuthorOrm $authorOrm)
+    public function save(AuthorEntity $authorEntity): void
     {
-        $this->authorOrm = $authorOrm;
-    }
-
-    public function save(AuthorDto $authorDto): void
-    {
-        $this->authorOrm->query()->create(
+        AuthorOrm::query()->create(
             [
-                "name" => $authorDto->name,
+                "name" => $authorEntity->name(),
             ]
         );
     }
