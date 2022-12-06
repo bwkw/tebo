@@ -21,7 +21,7 @@ class AuthorEntity
 
     public static function constructNewInstance($name): self
     {
-        // Todo: ドメインバリデーション
+        // todo: ドメインバリデーション
         return new self(
             null,
             $name,
