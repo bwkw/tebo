@@ -2,7 +2,6 @@
 
 namespace App\Domain\Entity;
 
-use App\Domain\DTO\AuthorDto;
 use LogicException;
 
 class AuthorEntity
@@ -11,7 +10,7 @@ class AuthorEntity
     private readonly string $name;
 
     private function __construct(
-        ?int $id,
+        int $id,
         string $name,
     )
     {
@@ -19,20 +18,12 @@ class AuthorEntity
         $this->name = $name;
     }
 
-    public static function constructNewInstance($name): self
+    public static function constructNewInstance(string $name): self
     {
         // todo: ドメインバリデーション
         return new self(
             null,
             $name,
-        );
-    }
-
-    public function reconstructFromRepository(AuthorDto $authorDto): self
-    {
-        return new self(
-            $authorDto->id,
-            $authorDto->name,
         );
     }
 

@@ -14,8 +14,8 @@ class CreateAuthorUseCase
         $this->authorRepository = $authorRepository;
     }
 
-    public function execute(AuthorEntity $authorEntity): void
+    public function execute(AuthorEntity $authorEntity): AuthorDto
     {
-        $this->authorRepository->save($authorEntity);
+        return $this->authorRepository->save($authorEntity);
     }
 }

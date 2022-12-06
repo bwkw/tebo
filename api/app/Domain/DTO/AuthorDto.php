@@ -7,7 +7,7 @@ class AuthorDto
     public readonly int $id;
     public readonly string $name;
 
-    private function __construct(
+    public function __construct(
         int $id,
         string $name
     )
