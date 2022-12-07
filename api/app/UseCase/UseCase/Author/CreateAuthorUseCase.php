@@ -2,6 +2,7 @@
 
 namespace App\Usecase\Usecase\Author;
 
+use App\Domain\DTO\AuthorDto;
 use App\Domain\Entity\AuthorEntity;
 use App\Domain\RepositoryInterface\AuthorRepositoryInterface;
 

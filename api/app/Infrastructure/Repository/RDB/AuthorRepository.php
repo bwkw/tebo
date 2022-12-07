@@ -11,13 +11,13 @@ class AuthorRepository implements AuthorRepositoryInterface
 {
     public function save(AuthorEntity $authorEntity): AuthorDto
     {
-        /** @var AuthorOrm $author */
-        $author = AuthorOrm::query()->create(
+        /** @var AuthorOrm $authorOrm */
+        $authorOrm = AuthorOrm::query()->create(
             [
                 "name" => $authorEntity->name(),
             ]
         );
-
-        return new AuthorDto($author->id, $author->name);
+        $reconstructedAuthorEntity = AuthorEntity::reconstructFromRepository($authorOrm->id, $authorOrm->name);
+        return $reconstructedAuthorEntity->toDto();
     }
 }

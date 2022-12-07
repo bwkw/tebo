@@ -2,6 +2,7 @@
 
 namespace App\Domain\Entity;
 
+use App\Domain\DTO\AuthorDto;
 use LogicException;
 
 class AuthorEntity
@@ -10,7 +11,7 @@ class AuthorEntity
     private readonly string $name;
 
     private function __construct(
-        int $id,
+        ?int $id,
         string $name,
     )
     {
@@ -27,10 +28,18 @@ class AuthorEntity
         );
     }
 
+    public static function reconstructFromRepository(int $id, string $name): self
+    {
+        return new self(
+            $id,
+            $name,
+        );
+    }
+
     public function id(): int
     {
         if ($this->id === null) {
-            throw new LogicException("RDBに保存する前にこのメソッドを呼び出さないでください。");
+            throw new LogicException("Repositoryを通す前にこのメソッドを呼び出さないでください。");
         }
 
         return $this->id;
@@ -39,5 +48,13 @@ class AuthorEntity
     public function name(): string
     {
         return $this->name;
+    }
+
+    public function toDto(): AuthorDto
+    {
+        return new AuthorDto(
+            $this->id,
+            $this->name,
+        );
     }
 }
