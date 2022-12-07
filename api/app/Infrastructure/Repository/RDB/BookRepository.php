@@ -3,29 +3,36 @@
 namespace App\Infrastructure\Repository\RDB;
 
 use App\Domain\DTO\BookDto;
+use App\Domain\Entity\BookEntity;
 use App\Domain\RepositoryInterface\BookRepositoryInterface;
 use App\Infrastructure\ORM\BookOrm;
 
 class BookRepository implements BookRepositoryInterface
 {
-    private BookOrm $bookOrm;
-
-    private function __construct(BookOrm $bookOrm)
+    public function save(BookEntity $bookEntity): BookDto
     {
-        $this->bookOrm = $bookOrm;
-    }
-
-    public function save(BookDto $bookDto): void
-    {
-        $this->bookOrm->query()->create(
+        /** @var BookOrm $bookOrm */
+        $bookOrm = BookOrm::query()->create(
             [
-                "title" => $bookDto->title,
-                "image_url" => $bookDto->imageUrl,
-                "page" => $bookDto->page,
-                "published_date" => $bookDto->publishedDate,
-                "author_id" => $bookDto->authorId,
-                "publish_id" =>$bookDto->publisherId,
+                "title" => $bookEntity->title(),
+                "description" => $bookEntity->description(),
+                "image_url" => $bookEntity->imageUrl(),
+                "page" => $bookEntity->page(),
+                "published_date" => $bookEntity->publishedDate(),
+                "author_id" => $bookEntity->authorId(),
+                "publish_id" =>$bookEntity->publisherId(),
             ]
         );
+        $reconstructedBookEntity = BookEntity::reconstructFromRepository(
+            $bookOrm->id,
+            $bookOrm->title,
+            $bookOrm->description,
+            $bookOrm->imageUrl,
+            $bookOrm->page,
+            $bookOrm->publishedDate,
+            $bookOrm->authorId,
+            $bookOrm->publisherId,
+        );
+        return $reconstructedBookEntity->toDto();
     }
 }
