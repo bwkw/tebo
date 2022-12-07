@@ -2,6 +2,7 @@
 
 namespace App\Usecase\Usecase\Publisher;
 
+use App\Domain\DTO\PublisherDto;
 use App\Domain\Entity\PublisherEntity;
 use App\Domain\RepositoryInterface\PublisherRepositoryInterface;
 
@@ -14,8 +15,8 @@ class CreatePublisherUseCase
         $this->publisherRepository = $publisherRepository;
     }
 
-    public function execute(PublisherEntity $publisherEntity): void
+    public function execute(PublisherEntity $publisherEntity): PublisherDto
     {
-        $this->publisherRepository->save($publisherEntity);
+        return $this->publisherRepository->save($publisherEntity);
     }
 }

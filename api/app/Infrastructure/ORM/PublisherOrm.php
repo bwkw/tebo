@@ -4,6 +4,11 @@ namespace App\Infrastructure\ORM;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int $id
+ * @property string $name
+ */
+
 class PublisherOrm extends Model
 {
     protected $table = "publishers";
