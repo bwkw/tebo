@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Domain\RepositoryInterface;
 
 use App\Domain\DTO\BookDto;
