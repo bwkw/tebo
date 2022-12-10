@@ -26,8 +26,7 @@ class BookEntity
         CarbonImmutable $publishedDate,
         int $authorId,
         int $publisherId,
-    )
-    {
+    ) {
         $this->id = $id;
         $this->title = $title;
         $this->description = $description;
