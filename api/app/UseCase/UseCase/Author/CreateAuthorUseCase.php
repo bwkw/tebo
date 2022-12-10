@@ -16,8 +16,7 @@ class CreateAuthorUseCase
     public function __construct(
         AuthorRepositoryInterface $authorRepository,
         AuthorDomainService $authorDomainService,
-    )
-    {
+    ) {
         $this->authorRepository = $authorRepository;
         $this->authorDomainService = $authorDomainService;
     }
@@ -30,7 +29,7 @@ class CreateAuthorUseCase
     public function execute(AuthorEntity $authorEntity): AuthorDto
     {
         if ($this->authorDomainService->Exists($authorEntity)) {
-            throw new ModelAlreadyExistsException($authorEntity->name() . "というタイトルの本は既に存在しています。");
+            throw new ModelAlreadyExistsException($authorEntity->name() . "は既に存在しています。");
         }
         return $this->authorRepository->save($authorEntity);
     }
