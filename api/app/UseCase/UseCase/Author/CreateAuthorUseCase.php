@@ -27,7 +27,7 @@ class CreateAuthorUseCase
     public function execute(AuthorEntity $authorEntity): AuthorDto
     {
         if ($this->authorDomainService->Exists($authorEntity)) {
-            return $this->authorRepository->getByName($authorEntity->name());
+            return $this->authorRepository->getByName($authorEntity->name);
         }
         return $this->authorRepository->save($authorEntity);
     }

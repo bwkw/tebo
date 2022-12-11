@@ -9,12 +9,12 @@ use LogicException;
 class BookEntity
 {
     private readonly ?int $id;
-    private readonly string $title;
-    private readonly string $description;
-    private readonly string $coverImageUrl;
-    private readonly int $page;
-    private readonly CarbonImmutable $publishedDate;
-    private readonly ?int $publisherId;
+    public readonly string $title;
+    public readonly string $description;
+    public readonly string $coverImageUrl;
+    public readonly int $page;
+    public readonly CarbonImmutable $publishedDate;
+    public readonly ?int $publisherId;
 
     private function __construct(
         ?int $id,
@@ -65,36 +65,6 @@ class BookEntity
         }
 
         return $this->id;
-    }
-
-    public function title(): string
-    {
-        return $this->title;
-    }
-
-    public function description(): string
-    {
-        return $this->description;
-    }
-
-    public function coverImageUrl(): string
-    {
-        return $this->coverImageUrl;
-    }
-
-    public function page(): int
-    {
-        return $this->page;
-    }
-
-    public function publishedDate(): CarbonImmutable
-    {
-        return $this->publishedDate;
-    }
-
-    public function publisherId(): ?int
-    {
-        return $this->publisherId;
     }
 
     public function toDto(): BookDto

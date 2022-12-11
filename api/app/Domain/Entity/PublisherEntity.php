@@ -8,7 +8,7 @@ use LogicException;
 class PublisherEntity
 {
     private readonly ?int $id;
-    private readonly string $name;
+    public readonly string $name;
 
     private function __construct(
         ?int $id,
@@ -42,11 +42,6 @@ class PublisherEntity
         }
 
         return $this->id;
-    }
-
-    public function name(): string
-    {
-        return $this->name;
     }
 
     public function toDto(): PublisherDto

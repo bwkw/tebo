@@ -27,7 +27,7 @@ class CreateAuthorBookUseCase
     public function execute(AuthorBookEntity $authorBookEntity): AuthorBookDto
     {
         if ($this->authorBookDomainService->Exists($authorBookEntity)) {
-            return $this->authorBookRepository->getByAuthorIdBookId($authorBookEntity->authorId(), $authorBookEntity->bookId());
+            return $this->authorBookRepository->getByAuthorIdBookId($authorBookEntity->authorId, $authorBookEntity->bookId);
         }
         return $this->authorBookRepository->save($authorBookEntity);
     }

@@ -27,7 +27,7 @@ class CreatePublisherUseCase
     public function execute(PublisherEntity $publisherEntity): PublisherDto
     {
         if ($this->publisherDomainService->Exists($publisherEntity)) {
-            return $this->publisherRepository->getByName($publisherEntity->name());
+            return $this->publisherRepository->getByName($publisherEntity->name);
         }
         return $this->publisherRepository->save($publisherEntity);
     }

@@ -15,7 +15,7 @@ class PublisherRepository implements PublisherRepositoryInterface
         /** @var PublisherOrm $publisherOrm */
         $publisherOrm = PublisherOrm::query()->create(
             [
-                "name" => $publisherEntity->name(),
+                "name" => $publisherEntity->name,
             ]
         );
         $reconstructedPublisherEntity = PublisherEntity::reconstructFromRepository($publisherOrm->id, $publisherOrm->name);

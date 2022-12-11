@@ -8,8 +8,8 @@ use LogicException;
 class AuthorBookEntity
 {
     private readonly ?int $id;
-    private readonly ?int $authorId;
-    private readonly int $bookId;
+    public readonly ?int $authorId;
+    public readonly int $bookId;
 
     private function __construct(
         ?int $id,
@@ -47,16 +47,6 @@ class AuthorBookEntity
         }
 
         return $this->id;
-    }
-
-    public function authorId(): ?int
-    {
-        return $this->authorId;
-    }
-
-    public function bookId(): int
-    {
-        return $this->bookId;
     }
 
     public function toDto(): AuthorBookDto

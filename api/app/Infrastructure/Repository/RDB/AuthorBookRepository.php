@@ -19,8 +19,8 @@ class AuthorBookRepository implements AuthorBookRepositoryInterface
         /** @var AuthorBookOrm $authorBookOrm */
         $authorBookOrm = AuthorBookOrm::query()->create(
             [
-                "author_id" => $authorBookEntity->authorId(),
-                "book_id" => $authorBookEntity->bookId(),
+                "author_id" => $authorBookEntity->authorId,
+                "book_id" => $authorBookEntity->bookId,
             ]
         );
         $reconstructedAuthorBookEntity = AuthorBookEntity::reconstructFromRepository(

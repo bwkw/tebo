@@ -19,7 +19,7 @@ class AuthorRepository implements AuthorRepositoryInterface
         /** @var AuthorOrm $authorOrm */
         $authorOrm = AuthorOrm::query()->create(
             [
-                "name" => $authorEntity->name(),
+                "name" => $authorEntity->name,
             ]
         );
         $reconstructedAuthorEntity = AuthorEntity::reconstructFromRepository($authorOrm->id, $authorOrm->name);

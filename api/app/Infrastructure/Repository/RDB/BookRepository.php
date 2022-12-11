@@ -19,12 +19,12 @@ class BookRepository implements BookRepositoryInterface
         /** @var BookOrm $bookOrm */
         $bookOrm = BookOrm::query()->create(
             [
-                "title" => $bookEntity->title(),
-                "description" => $bookEntity->description(),
-                "cover_image_url" => $bookEntity->coverImageUrl(),
-                "page" => $bookEntity->page(),
-                "published_date" => $bookEntity->publishedDate(),
-                "publisher_id" =>$bookEntity->publisherId(),
+                "title" => $bookEntity->title,
+                "description" => $bookEntity->description,
+                "cover_image_url" => $bookEntity->coverImageUrl,
+                "page" => $bookEntity->page,
+                "published_date" => $bookEntity->publishedDate,
+                "publisher_id" =>$bookEntity->publisherId,
             ]
         );
         $reconstructedBookEntity = BookEntity::reconstructFromRepository(
