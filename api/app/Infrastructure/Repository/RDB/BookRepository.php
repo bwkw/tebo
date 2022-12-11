@@ -21,20 +21,20 @@ class BookRepository implements BookRepositoryInterface
             [
                 "title" => $bookEntity->title(),
                 "description" => $bookEntity->description(),
-                "image_url" => $bookEntity->imageUrl(),
+                "cover_image_url" => $bookEntity->coverImageUrl(),
                 "page" => $bookEntity->page(),
                 "published_date" => $bookEntity->publishedDate(),
-                "publish_id" =>$bookEntity->publisherId(),
+                "publisher_id" =>$bookEntity->publisherId(),
             ]
         );
         $reconstructedBookEntity = BookEntity::reconstructFromRepository(
             $bookOrm->id,
             $bookOrm->title,
             $bookOrm->description,
-            $bookOrm->imageUrl,
+            $bookOrm->cover_image_url,
             $bookOrm->page,
-            $bookOrm->publishedDate,
-            $bookOrm->publisherId,
+            $bookOrm->published_date,
+            $bookOrm->publisher_id,
         );
         return $reconstructedBookEntity->toDto();
     }
@@ -52,10 +52,10 @@ class BookRepository implements BookRepositoryInterface
             $bookOrm->id,
             $bookOrm->title,
             $bookOrm->description,
-            $bookOrm->imageUrl,
+            $bookOrm->cover_image_url,
             $bookOrm->page,
-            $bookOrm->publishedDate,
-            $bookOrm->publisherId,
+            $bookOrm->published_date,
+            $bookOrm->publisher_id,
         );
         return $reconstructedBookEntity->toDto();
     }

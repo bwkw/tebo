@@ -11,56 +11,51 @@ class BookEntity
     private readonly ?int $id;
     private readonly string $title;
     private readonly string $description;
-    private readonly string $imageUrl;
+    private readonly string $coverImageUrl;
     private readonly int $page;
     private readonly CarbonImmutable $publishedDate;
-    private readonly int $authorId;
-    private readonly int $publisherId;
+    private readonly ?int $publisherId;
 
     private function __construct(
         ?int $id,
         string $title,
         string $description,
-        string $imageUrl,
+        string $coverImageUrl,
         int $page,
         CarbonImmutable $publishedDate,
-        int $authorId,
-        int $publisherId,
+        ?int $publisherId,
     ) {
         $this->id = $id;
         $this->title = $title;
         $this->description = $description;
-        $this->imageUrl = $imageUrl;
+        $this->coverImageUrl = $coverImageUrl;
         $this->page = $page;
         $this->publishedDate = $publishedDate;
-        $this->authorId = $authorId;
         $this->publisherId = $publisherId;
     }
 
     public static function constructNewInstance(
         string $title,
         string $description,
-        string $imageUrl,
+        string $coverImageUrl,
         int $page,
         CarbonImmutable $publishedDate,
-        int $authorId,
-        int $publisherId,
+        ?int $publisherId,
     ): self {
         // todo: ドメインバリデーション
-        return new self(null, $title, $description, $imageUrl, $page, $publishedDate, $authorId, $publisherId);
+        return new self(null, $title, $description, $coverImageUrl, $page, $publishedDate, $publisherId);
     }
 
     public static function reconstructFromRepository(
         int $id,
         string $title,
         string $description,
-        string $imageUrl,
+        string $coverImageUrl,
         int $page,
         CarbonImmutable $publishedDate,
-        int $authorId,
-        int $publisherId,
+        ?int $publisherId,
     ): self {
-        return new self($id, $title, $description, $imageUrl, $page, $publishedDate, $authorId, $publisherId);
+        return new self($id, $title, $description, $coverImageUrl, $page, $publishedDate, $publisherId);
     }
 
     public function id(): int
@@ -82,9 +77,9 @@ class BookEntity
         return $this->description;
     }
 
-    public function imageUrl(): string
+    public function coverImageUrl(): string
     {
-        return $this->imageUrl;
+        return $this->coverImageUrl;
     }
 
     public function page(): int
@@ -97,12 +92,7 @@ class BookEntity
         return $this->publishedDate;
     }
 
-    public function authorId(): int
-    {
-        return $this->authorId;
-    }
-
-    public function publisherId(): int
+    public function publisherId(): ?int
     {
         return $this->publisherId;
     }
@@ -113,10 +103,9 @@ class BookEntity
             $this->id,
             $this->title,
             $this->description,
-            $this->imageUrl,
+            $this->coverImageUrl,
             $this->page,
             $this->publishedDate,
-            $this->authorId,
             $this->publisherId,
         );
     }
