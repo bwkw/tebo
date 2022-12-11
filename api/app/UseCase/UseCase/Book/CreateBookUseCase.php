@@ -32,4 +32,3 @@ class CreateBookUseCase
         return $this->bookRepository->save($bookEntity);
     }
 }
-
