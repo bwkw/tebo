@@ -22,9 +22,9 @@ class BookDomainService
     public function Exists(BookEntity $bookEntity): bool
     {
         try {
-            $this->bookRepository->getByTitle($bookEntity->title());
+            $this->bookRepository->getByTitle($bookEntity->title);
             return true;
-        } catch (ModelNotFoundException $e) {
+        } catch (ModelNotFoundException) {
             return false;
         }
     }

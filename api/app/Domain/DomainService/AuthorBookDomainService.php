@@ -22,9 +22,12 @@ class AuthorBookDomainService
     public function Exists(AuthorBookEntity $authorBookEntity): bool
     {
         try {
-            $authorBook = $this->authorBookRepository->getByAuthorIdBookId($authorBookEntity->authorId(), $authorBookEntity->bookId());
+            $this->authorBookRepository->getByAuthorIdBookId(
+                $authorBookEntity->authorId,
+                $authorBookEntity->bookId
+            );
             return true;
-        } catch (ModelNotFoundException $e) {
+        } catch (ModelNotFoundException) {
             return false;
         }
     }

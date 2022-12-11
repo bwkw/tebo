@@ -22,9 +22,9 @@ class PublisherDomainService
     public function Exists(PublisherEntity $publisherEntity): bool
     {
         try {
-            $publisher = $this->publisherRepository->getByName($publisherEntity->name());
+            $this->publisherRepository->getByName($publisherEntity->name);
             return true;
-        } catch (ModelNotFoundException $e) {
+        } catch (ModelNotFoundException) {
             return false;
         }
     }

@@ -22,9 +22,9 @@ class AuthorDomainService
     public function Exists(AuthorEntity $authorEntity): bool
     {
         try {
-            $author = $this->authorRepository->getByName($authorEntity->name());
+            $this->authorRepository->getByName($authorEntity->name);
             return true;
-        } catch (ModelNotFoundException $e) {
+        } catch (ModelNotFoundException) {
             return false;
         }
     }
