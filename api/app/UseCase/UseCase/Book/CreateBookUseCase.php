@@ -2,22 +2,34 @@
 
 namespace App\Usecase\Usecase\Book;
 
+use App\Domain\DomainService\BookDomainService;
 use App\Domain\DTO\BookDto;
 use App\Domain\Entity\BookEntity;
 use App\Domain\RepositoryInterface\BookRepositoryInterface;
 
 class CreateBookUseCase
 {
-    private BookRepositoryInterface $authorRepository;
+    private BookDomainService $bookDomainService;
+    private BookRepositoryInterface $bookRepository;
 
-    public function __construct(BookRepositoryInterface $authorRepository)
-    {
-        $this->authorRepository = $authorRepository;
+    public function __construct(
+        BookDomainService $bookDomainService,
+        BookRepositoryInterface $bookRepository,
+    ) {
+        $this->bookDomainService = $bookDomainService;
+        $this->bookRepository = $bookRepository;
     }
 
-    public function execute(BookEntity $authorEntity): BookDto
+    /**
+     * @param BookEntity $bookEntity
+     * @return BookDto
+     */
+    public function execute(BookEntity $bookEntity): BookDto
     {
-        return $this->authorRepository->save($authorEntity);
+        if ($this->bookDomainService->Exists($bookEntity)) {
+            return $this->bookRepository->getByTitle($bookEntity->title());;
+        }
+        return $this->bookRepository->save($bookEntity);
     }
 }
 
