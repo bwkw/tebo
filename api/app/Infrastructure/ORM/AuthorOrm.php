@@ -16,6 +16,6 @@ class AuthorOrm extends Model
 
     public function books(): BelongsToMany
     {
-        return $this->belongsToMany(BookOrm::class);
+        return $this->belongsToMany(BookOrm::class, 'author_book', 'author_id', 'book_id');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Infrastructure\ORM;
 
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
@@ -22,7 +23,12 @@ class BookOrm extends Model
 
     public function authors(): BelongsToMany
     {
-        return $this->belongsToMany(AuthorOrm::class);
+        return $this->belongsToMany(AuthorOrm::class, 'author_book', 'book_id', 'author_id');
+    }
+
+    public function publisher(): BelongsTo
+    {
+        return $this->belongsTo(PublisherOrm::class);
     }
 
     public function getPublishedDateAttribute($value): CarbonImmutable
