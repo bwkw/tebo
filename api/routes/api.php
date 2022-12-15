@@ -21,4 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'books'], function() {
     Route::get('/', [BookController::class, 'fetchBooks']);
+    Route::get('/{bookId}', [BookController::class, 'fetchBook']);
 });

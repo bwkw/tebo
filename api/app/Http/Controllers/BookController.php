@@ -12,4 +12,9 @@ class BookController extends Controller
     {
         return BookResource::collection(BookOrm::all());
     }
+
+    public function fetchBook(int $bookId): BookResource
+    {
+        return new BookResource(BookOrm::query()->findOrFail($bookId));
+    }
 }
