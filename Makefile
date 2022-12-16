@@ -24,3 +24,7 @@ db:
 	docker compose exec db bash
 npm:
 	docker compose exec client ash
+phpcs:
+	docker compose exec app composer phpcs
+phpcbf:
+	docker compose exec app composer phpcbf
