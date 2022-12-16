@@ -26,4 +26,8 @@
     <exclude-pattern>/server.php</exclude-pattern>
     <exclude-pattern>/app/Console/Kernel.php</exclude-pattern>
     <exclude-pattern>/tests/CreatesApplication.php</exclude-pattern>
+
+    <rule ref="PSR1.Methods.CamelCapsMethodName.NotCamelCaps">
+        <exclude-pattern>*/tests/*</exclude-pattern>
+    </rule>
 </ruleset>
