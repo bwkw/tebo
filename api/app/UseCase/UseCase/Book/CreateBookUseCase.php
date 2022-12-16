@@ -26,7 +26,7 @@ class CreateBookUseCase
      */
     public function execute(BookEntity $bookEntity): BookDto
     {
-        if ($this->bookDomainService->Exists($bookEntity)) {
+        if ($this->bookDomainService->exists($bookEntity)) {
             return $this->bookRepository->getByTitle($bookEntity->title);
         }
         return $this->bookRepository->save($bookEntity);

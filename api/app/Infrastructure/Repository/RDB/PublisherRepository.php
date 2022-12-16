@@ -18,7 +18,10 @@ class PublisherRepository implements PublisherRepositoryInterface
                 "name" => $publisherEntity->name,
             ]
         );
-        $reconstructedPublisherEntity = PublisherEntity::reconstructFromRepository($publisherOrm->id, $publisherOrm->name);
+        $reconstructedPublisherEntity = PublisherEntity::reconstructFromRepository(
+            $publisherOrm->id,
+            $publisherOrm->name,
+        );
         return $reconstructedPublisherEntity->toDto();
     }
 
@@ -31,7 +34,10 @@ class PublisherRepository implements PublisherRepositoryInterface
     {
         /** @var PublisherOrm $publisherOrm */
         $publisherOrm = PublisherOrm::query()->where("name", $name)->firstOrFail();
-        $reconstructedPublisherEntity = PublisherEntity::reconstructFromRepository($publisherOrm->id, $publisherOrm->name);
+        $reconstructedPublisherEntity = PublisherEntity::reconstructFromRepository(
+            $publisherOrm->id,
+            $publisherOrm->name,
+        );
         return $reconstructedPublisherEntity->toDto();
     }
 }

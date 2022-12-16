@@ -19,7 +19,7 @@ class BookDomainService
      * @param BookEntity $bookEntity
      * @return bool
      */
-    public function Exists(BookEntity $bookEntity): bool
+    public function exists(BookEntity $bookEntity): bool
     {
         try {
             $this->bookRepository->getByTitle($bookEntity->title);

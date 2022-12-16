@@ -64,7 +64,7 @@ class CreateBooks extends Command
         $openBdApiBaseUrl = 'https://api.openbd.jp/v1/get?isbn=';
         $googleBooksApiBaseUrl .= '?q=' . $keyword . '&maxResults=' . $maxResults;
 
-        for ($i=0; $i<5; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $startIndex = $maxResults * $i;
             $googleBooksApiUrl = $googleBooksApiBaseUrl . '&startIndex=' . $startIndex;
             $results = json_decode(file_get_contents($googleBooksApiUrl))->items;
@@ -95,20 +95,39 @@ class CreateBooks extends Command
                 $description = $result->volumeInfo->description ?? ""; //説明はGoogleBooksApiで十分そう
                 $coverImageUrl = $result->volumeInfo->imageLinks->thumbnail ?? "";
                 $page = $result->volumeInfo->pageCount ?? 0; //ページ数はGoogleBooksApiの方がデータ持ってる
-                $publishedDate = new CarbonImmutable($result->volumeInfo->publishedDate) ?? new CarbonImmutable("99991231");
+                $publishedDate =
+                    new CarbonImmutable($result->volumeInfo->publishedDate) ??
+                    new CarbonImmutable("99991231");
                 $authors = $result->volumeInfo->authors ?? null; //著者はGoogleBooksApiの方がデータ持ってる
                 if ($authors) {
                     foreach ($authors as $author) {
                         $authorEntity = AuthorEntity::constructNewInstance($author);
                         $authorDto = $this->createAuthorUseCase->execute($authorEntity);
-                        $bookEntity = BookEntity::constructNewInstance($title, $description, $coverImageUrl, $page, $publishedDate, $publisherId);
+                        $bookEntity = BookEntity::constructNewInstance(
+                            $title,
+                            $description,
+                            $coverImageUrl,
+                            $page,
+                            $publishedDate,
+                            $publisherId,
+                        );
                         $bookDto = $this->createBookUseCase->execute($bookEntity);
-                        $authorBookEntity = AuthorBookEntity::constructNewInstance($authorDto->id, $bookDto->id);
+                        $authorBookEntity = AuthorBookEntity::constructNewInstance(
+                            $authorDto->id,
+                            $bookDto->id,
+                        );
                         $this->createAuthorBookUseCase->execute($authorBookEntity);
                     }
                 } else {
                     $authorId = null;
-                    $bookEntity = BookEntity::constructNewInstance($title, $description, $coverImageUrl, $page, $publishedDate, $publisherId);
+                    $bookEntity = BookEntity::constructNewInstance(
+                        $title,
+                        $description,
+                        $coverImageUrl,
+                        $page,
+                        $publishedDate,
+                        $publisherId,
+                    );
                     $bookDto = $this->createBookUseCase->execute($bookEntity);
                     $authorBookEntity = AuthorBookEntity::constructNewInstance($authorId, $bookDto->id);
                     $this->createAuthorBookUseCase->execute($authorBookEntity);

@@ -22,7 +22,10 @@ class AuthorRepository implements AuthorRepositoryInterface
                 "name" => $authorEntity->name,
             ]
         );
-        $reconstructedAuthorEntity = AuthorEntity::reconstructFromRepository($authorOrm->id, $authorOrm->name);
+        $reconstructedAuthorEntity = AuthorEntity::reconstructFromRepository(
+            $authorOrm->id,
+            $authorOrm->name,
+        );
         return $reconstructedAuthorEntity->toDto();
     }
 

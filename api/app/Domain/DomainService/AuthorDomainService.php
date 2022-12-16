@@ -19,7 +19,7 @@ class AuthorDomainService
      * @param AuthorEntity $authorEntity
      * @return bool
      */
-    public function Exists(AuthorEntity $authorEntity): bool
+    public function exists(AuthorEntity $authorEntity): bool
     {
         try {
             $this->authorRepository->getByName($authorEntity->name);
