@@ -24,7 +24,7 @@ class BookRepository implements BookRepositoryInterface
                 "cover_image_url" => $bookEntity->coverImageUrl,
                 "page" => $bookEntity->page,
                 "published_date" => $bookEntity->publishedDate,
-                "publisher_id" =>$bookEntity->publisherId,
+                "publisher_id" => $bookEntity->publisherId,
             ]
         );
         $reconstructedBookEntity = BookEntity::reconstructFromRepository(

@@ -19,7 +19,7 @@ class PublisherDomainService
      * @param PublisherEntity $publisherEntity
      * @return bool
      */
-    public function Exists(PublisherEntity $publisherEntity): bool
+    public function exists(PublisherEntity $publisherEntity): bool
     {
         try {
             $this->publisherRepository->getByName($publisherEntity->name);
