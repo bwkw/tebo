@@ -3,6 +3,7 @@ version: '3.8'  #composeファイルのバージョン（https://docs.docker.jp/
 volumes:
   php-fpm-socket:
   db-store:  #コンテナを削除してもデータベースのデータが残るようにボリュームとして定義
+  test-db-store:
 
 services:
   app:
@@ -22,13 +23,7 @@ services:
       - type: bind
         source: ./api
         target: /app
-    environment:  #Laravelの.envよりもサーバー環境変数の値の方が優先されます
-      - DB_CONNECTION=mysql
-      - DB_HOST=db
-      - DB_PORT=3306
-      - DB_DATABASE=${DB_NAME:-laravel}
-      - DB_USERNAME=${DB_USER:-phper}
-      - DB_PASSWORD=${DB_PASS:-secret}
+    environment:  #Laravelの.envよりもサーバー環境変数の値の方が優先される
       - TZ=Asia/Tokyo
 
   client:
@@ -69,6 +64,7 @@ services:
         target: /app
 
   db:
+    container_name: db
     build:
       context: .
       dockerfile: ./infra/docker/db/Dockerfile
@@ -83,8 +79,30 @@ services:
         volume:
           nocopy: true
     environment:
-      - MYSQL_DATABASE=${DB_NAME:-laravel}
-      - MYSQL_USER=${DB_USER:-phper}
-      - MYSQL_PASSWORD=${DB_PASS:-secret}
-      - MYSQL_ROOT_PASSWORD=${DB_PASS:-secret}
-      - TZ='Asia/Tokyo'
+      MYSQL_DATABASE: db
+      MYSQL_USER: db-user
+      MYSQL_PASSWORD: db-password
+      MYSQL_ROOT_PASSWORD: db-password
+      TZ: 'Asia/Tokyo'
+
+  test-db:
+    container_name: test-db
+    build:
+      context: .
+      dockerfile: ./infra/docker/db/Dockerfile
+    ports:
+      - target: 3306
+        published: 43306
+        protocol: tcp
+    volumes:
+      - type: volume
+        source: test-db-store
+        target: /var/lib/mysql
+        volume:
+          nocopy: true
+    environment:
+      MYSQL_DATABASE: test-db
+      MYSQL_USER: test-db-user
+      MYSQL_PASSWORD: test-db-password
+      MYSQL_ROOT_PASSWORD: test-db-password
+      TZ: 'Asia/Tokyo'
