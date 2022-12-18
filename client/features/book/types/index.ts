@@ -10,3 +10,7 @@ export type fetchBookType = {
   authors: string[]
   publisher: string
 }
+
+export type bookIndexType = {
+  books: fetchBookType[]
+}
