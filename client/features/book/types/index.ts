@@ -1,4 +1,4 @@
-export type fetchBookType = {
+export type FetchBookType = {
   id: number
   title: string
   description: string
@@ -11,6 +11,10 @@ export type fetchBookType = {
   publisher: string
 }
 
-export type bookIndexType = {
-  books: fetchBookType[]
+export type BookIndexType = {
+  books: FetchBookType[]
+}
+
+export type BookType = {
+  book: FetchBookType
 }
