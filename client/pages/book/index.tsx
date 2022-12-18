@@ -1,4 +1,6 @@
-import { Grid, Card, Col, Row, Button } from '@nextui-org/react'
+import { Grid, Card, Col, Row } from '@nextui-org/react'
+
+import { Button94f9f0 } from '../../components/elements/Button/Button94f9f0'
 
 import type { GetServerSideProps, NextPage } from 'next'
 
@@ -50,9 +52,7 @@ const Book: NextPage<bookIndexType> = ({ books }) => {
                   </Col>
                   <Col>
                     <Row justify='flex-end'>
-                      <Button flat auto rounded css={{ color: '#94f9f0', bg: '#94f9f026' }}>
-                        <div>Detail</div>
-                      </Button>
+                      <Button94f9f0 text={'Detail'} url={`/books/${book.id}`} />
                     </Row>
                   </Col>
                 </Row>
