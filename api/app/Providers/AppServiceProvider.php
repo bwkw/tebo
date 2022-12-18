@@ -10,6 +10,7 @@ use App\Infrastructure\Repository\RDB\AuthorBookRepository;
 use App\Infrastructure\Repository\RDB\AuthorRepository;
 use App\Infrastructure\Repository\RDB\BookRepository;
 use App\Infrastructure\Repository\RDB\PublisherRepository;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -46,6 +47,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        JsonResource::withoutWrapping();
     }
 }
