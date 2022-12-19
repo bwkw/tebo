@@ -1,0 +1,20 @@
+on:
+  pull_request:
+    types: synchronize
+
+jobs:
+  job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate token
+        id: generate_token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.PRIVATE_KEY }}
+      - name: Output token
+        env:
+          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+        run: |
+          echo "Access Token: ${TOKEN:4}"
+          gh pr view 1 --repo bwkw/tebo --json number,state,title,url,author,labels,commits,mergedAt,closedAt
