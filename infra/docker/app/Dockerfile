@@ -1,5 +1,5 @@
-FROM php:8.1-fpm
 # イメージをビルドするためのベースイメージを設定する（https://hub.docker.com/_/php）
+FROM php:8.1-fpm
 
 RUN apt-get update && \
     apt-get install -y git unzip libzip-dev libicu-dev libonig-dev && \

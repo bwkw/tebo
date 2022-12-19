@@ -32,7 +32,7 @@ jobs:
           context: .
           file: ./infra/docker/app/Dockerfile
           push: true
-          tags: bwkw/docker-laravel-github-actions-app:latest
+          tags: bwkw/tebo-app:latest
 
       - name: Build & Push nginx Container
         uses: docker/build-push-action@v2
@@ -40,7 +40,7 @@ jobs:
           context: .
           file: ./infra/docker/web/Dockerfile
           push: true
-          tags: bwkw/docker-laravel-github-actions-web:latest
+          tags: bwkw/tebo-web:latest
 
       - name: Build & Push db Container
         uses: docker/build-push-action@v2
@@ -48,4 +48,4 @@ jobs:
           context: .
           file: ./infra/docker/db/Dockerfile
           push: true
-          tags: bwkw/docker-laravel-github-actions-db:latest
+          tags: bwkw/tebo-db:latest
