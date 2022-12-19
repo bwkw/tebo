@@ -1,5 +1,5 @@
 on:
-  push
+  workflow_dispatch
 
 jobs:
   job:
@@ -13,7 +13,7 @@ jobs:
           private_key: ${{ secrets.PRIVATE_KEY }}
       - name: Output token
         env:
-          TOKEN: ${{ steps.generate_token.outputs.token }}
+          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
         run: |
           echo "Access Token: ${TOKEN:4}"
           gh pr view 1 --json number,state,title,url,author,labels,commits,mergedAt,closedAt
