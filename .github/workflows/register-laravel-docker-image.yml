@@ -8,7 +8,7 @@ on:
       - 'infra/docker/db/Dockerfile'
 
 jobs:
-  docker-image-register:
+  register-docker-image:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
