@@ -41,8 +41,11 @@ jobs:
           docker-compose exec -T app php artisan key:generate --env=testing
           docker-compose exec -T app php artisan storage:link
 
-      - name: php cs
+      - name: Laravel Format
         run: docker-compose exec -T app composer phpcs
+
+      - name: Next Format
+        run: docker compose exec client npm run lint
 
       - name: Laravel Version
         run: docker-compose exec -T app php artisan --version
