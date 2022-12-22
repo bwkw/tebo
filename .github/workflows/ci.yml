@@ -42,7 +42,7 @@ jobs:
           docker-compose exec -T app php artisan storage:link
 
       - name: Npm Install
-        run: docker-compose exec -T client npm install
+        run: docker-compose exec client npm install
 
       - name: Laravel Version
         run: docker-compose exec -T app php artisan --version
