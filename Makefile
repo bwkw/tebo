@@ -29,9 +29,9 @@ test-db:
 test-db-migrate:
 	docker compose exec app php artisan migrate --env=testing
 test:
-	docker compose exec app php artisan test
+	docker compose exec app php artisan test --env=testing
 test-parallel:
-	docker compose exec app php artisan test --parallel
+	docker compose exec app php artisan test --parallel --env=testing
 npm:
 	docker compose exec client ash
 phpcs:
