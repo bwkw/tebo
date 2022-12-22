@@ -30,6 +30,9 @@ jobs:
           docker-compose exec -T app php --version
           docker-compose exec -T app composer --version
 
+      - name: Npm Version
+        run: docker-compose exec -T client npm --version
+
       - name: Composer Install
         run: docker-compose exec -T app composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
 
@@ -41,14 +44,20 @@ jobs:
           docker-compose exec -T app php artisan key:generate --env=testing
           docker-compose exec -T app php artisan storage:link
 
+      - name: Npm Install
+        run: docker-compose exec -T client npm install
+
+      - name: Laravel Version
+        run: docker-compose exec -T app php artisan --version
+
+      - name: Next Version
+        run: docker-compose exec -T client npx next --version
+
       - name: Laravel Format
         run: docker-compose exec -T app composer phpcs
 
       - name: Next Format
         run: docker-compose exec -T client npm run lint
-
-      - name: Laravel Version
-        run: docker-compose exec -T app php artisan --version
 
       - name: Laravel Migrate
         run: docker-compose exec -T app php artisan migrate --env=testing
