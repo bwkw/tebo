@@ -30,8 +30,8 @@ jobs:
           docker-compose exec -T app php --version
           docker-compose exec -T app composer --version
 
-      - name: Npm Version
-        run: docker-compose exec -T client npm --version
+      - name: Node Version
+        run: docker-compose exec -T client node --version
 
       - name: Composer Install
         run: docker-compose exec -T app composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
