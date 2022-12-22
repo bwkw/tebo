@@ -34,6 +34,8 @@ test-parallel:
 	docker compose exec app php artisan test --parallel --env=testing
 npm:
 	docker compose exec client ash
+lint:
+	docker compose exec client npm run lint
 phpcs:
 	docker compose exec app composer phpcs
 phpcbf:
