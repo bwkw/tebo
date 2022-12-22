@@ -17,6 +17,11 @@ jobs:
       - name: Docker Version
         run: docker version
 
+      - name: setup node
+        uses: actions/setup-node@master
+        with:
+          node-version: ${{ matrix.node-version }}
+
       - name: Docker Compose Build and Up
         run: |
           docker-compose build
@@ -41,20 +46,18 @@ jobs:
           docker-compose exec -T app php artisan key:generate --env=testing
           docker-compose exec -T app php artisan storage:link
 
-      - name: Npm Install
-        run: docker-compose exec client npm install
+      - name: Npm Ci
+        run: npm ci
 
       - name: Laravel Version
         run: docker-compose exec -T app php artisan --version
 
-      - name: Next Version
-        run: docker-compose exec -T client npx next --version
 
       - name: Laravel Format
         run: docker-compose exec -T app composer phpcs
 
       - name: Next Format
-        run: docker-compose exec -T client npm run lint
+        run: npm run lint
 
       - name: Laravel Migrate
         run: docker-compose exec -T app php artisan migrate --env=testing
