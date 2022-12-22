@@ -38,8 +38,9 @@ jobs:
           docker-compose exec -T app php --version
           docker-compose exec -T app composer --version
 
-      - name: Composer Update
-        run: docker-compose exec -T app composer update
+      - name: Composer Install
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: docker-compose exec -T app composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
 
       - name: Composer Dump Autoload
         run: docker-compose exec -T app composer dump-autoload -q
