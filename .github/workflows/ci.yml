@@ -1,11 +1,11 @@
-name: Run Laravel Test
+name: CI
 
 on:
   pull_request:
     types: synchronize
 
 jobs:
-  run-laravel-test:
+  run-ci:
     runs-on: ubuntu-latest
 
     steps:
@@ -50,6 +50,9 @@ jobs:
           docker-compose exec -T app cp .env.example .env=testing
           docker-compose exec -T app php artisan key:generate --env=testing
           docker-compose exec -T app php artisan storage:link
+
+      - name: php cs
+        run: docker-compose exec -T app composer phpcs
 
       - name: Laravel Version
         run: docker-compose exec -T app php artisan --version
