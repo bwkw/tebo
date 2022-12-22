@@ -40,10 +40,10 @@ jobs:
 
       - name: Laravel Settings
         run: |
-          docker-compose exec app composer install
-          docker-compose exec app cp .env.example .env
-          docker-compose exec app php artisan key:generate
-          docker-compose exec app php artisan storage:link
+          docker-compose exec -T app composer install
+          docker-compose exec -T app cp .env.example .env
+          docker-compose exec -T app php artisan key:generate
+          docker-compose exec -T app php artisan storage:link
 
       - name: Laravel Version
         run: docker-compose exec -T app php artisan --version
