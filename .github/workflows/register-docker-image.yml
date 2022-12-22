@@ -1,4 +1,4 @@
-name: Register Laravel Docker Image
+name: Register Docker Image
 
 on:
   pull_request:
@@ -8,6 +8,7 @@ on:
 jobs:
   register-docker-image:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
 
@@ -47,3 +48,11 @@ jobs:
           file: ./infra/docker/db/Dockerfile
           push: true
           tags: bwkw/tebo-db:latest
+
+      - name: Build & Push client Container
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./infra/docker/client/Dockerfile
+          push: true
+          tags: bwkw/tebo-client:latest
