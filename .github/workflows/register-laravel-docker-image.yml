@@ -3,9 +3,7 @@ name: Register Laravel Docker Image
 on:
   pull_request:
     paths:
-      - 'infra/docker/app/Dockerfile'
-      - 'infra/docker/web/Dockerfile'
-      - 'infra/docker/db/Dockerfile'
+      - 'infra/docker/*'
 
 jobs:
   register-docker-image:
