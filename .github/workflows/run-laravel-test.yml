@@ -34,7 +34,7 @@ jobs:
         run: docker-compose exec -T app composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --no-dev --prefer-dist
 
       - name: Composer Dump Autoload
-        run: docker-compose exec -T app composer dump-autoload -q
+        run: docker-compose exec -T app composer dump-autoload
 
       - name: Laravel Settings
         run: |
