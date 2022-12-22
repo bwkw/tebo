@@ -1,5 +1,5 @@
-FROM php:8.1-fpm
 # イメージをビルドするためのベースイメージを設定する（https://hub.docker.com/_/php）
+FROM php:8.1-fpm
 
 RUN apt-get update && \
     apt-get install -y git unzip libzip-dev libicu-dev libonig-dev && \
@@ -16,7 +16,7 @@ COPY ./infra/docker/app/php.ini /usr/local/etc/php/php.ini
 # ローカルで（後ほど）作成する php.ini （PHPの設定ファイル）をDockerコンテナ内にコピー
 # COPY [ローカル側のパス] [コンテナ側のパス]（ローカル側のパスはbuildコマンドを実行するディレクトリからのパス）
 
-COPY --from=composer:2.0 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Laravelを使うためComposerをインストール
 # マルチステージビルドと言われ、イメージの軽量化に役立つみたい（https://docs.docker.com/develop/develop-images/multistage-build/）
 

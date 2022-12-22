@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Usecase\Usecase\Author;
+namespace App\UseCase\UseCase\Author;
 
 use App\Domain\DomainService\AuthorDomainService;
 use App\Domain\DTO\AuthorDto;

@@ -1,0 +1,73 @@
+name: CI
+
+on:
+  pull_request:
+    types: synchronize
+
+jobs:
+  run-ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Ubuntu Version
+        run: cat /etc/os-release
+
+      - name: Docker Version
+        run: docker version
+
+      - name: Setup Node
+        uses: actions/setup-node@master
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Docker Compose Build and Up
+        run: |
+          docker-compose build
+          docker-compose up -d
+
+      - name: Docker Compose Process
+        run: docker-compose ps -a
+
+      - name: PHP, Composer Version
+        run: |
+          docker-compose exec -T app php --version
+          docker-compose exec -T app composer --version
+
+      - name: Composer Install
+        run: docker-compose exec -T app composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+
+      - name: Composer Dump Autoload
+        run: docker-compose exec -T app composer dump-autoload
+
+      - name: Laravel Settings
+        run: |
+          docker-compose exec -T app php artisan key:generate --env=testing
+          docker-compose exec -T app php artisan storage:link
+
+      - name: Npm Install
+        run: docker-compose exec -T　client npm install
+
+      - name: Laravel Version
+        run: docker-compose exec -T app php artisan --version
+
+      - name: Laravel Format
+        run: docker-compose exec -T app composer phpcs
+
+      - name: Next Format
+        run: docker-compose exec -T　client npm run lint
+
+      - name: Laravel Migrate
+        run: docker-compose exec -T app php artisan migrate --env=testing
+
+      - name: Laravel Rollback
+        run: docker-compose exec -T app php artisan migrate:refresh --env=testing
+
+      - name: Laravel Seeding
+        run: docker-compose exec -T app php artisan db:seed --env=testing
+
+      - name: Laravel Testing
+        run: |
+          docker-compose exec -T app php artisan config:clear
+          docker-compose exec -T app php artisan test --parallel --env=testing
