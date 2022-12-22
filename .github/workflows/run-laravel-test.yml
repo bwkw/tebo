@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
 
       - name: Ubuntu Version
         run: cat /etc/os-release
@@ -45,6 +45,7 @@ jobs:
       - name: Laravel Settings
         run: |
           docker-compose exec -T app cp .env.example .env
+          docker-compose exec -T app composer dump-autoload
           docker-compose exec -T app php artisan key:generate
           docker-compose exec -T app php artisan optimize
           docker-compose exec -T app chmod -R 777 storage bootstrap/cache
