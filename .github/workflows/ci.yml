@@ -17,7 +17,7 @@ jobs:
       - name: Docker Version
         run: docker version
 
-      - name: setup node
+      - name: Setup Node
         uses: actions/setup-node@master
         with:
           node-version: ${{ matrix.node-version }}
@@ -47,7 +47,9 @@ jobs:
           docker-compose exec -T app php artisan storage:link
 
       - name: Npm Ci
-        run: npm ci
+        run: |
+          npm install
+          npm ci
 
       - name: Laravel Version
         run: docker-compose exec -T app php artisan --version
