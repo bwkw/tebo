@@ -6,10 +6,10 @@ use App\Domain\Entity\AuthorBookEntity;
 use App\Domain\Entity\AuthorEntity;
 use App\Domain\Entity\BookEntity;
 use App\Domain\Entity\PublisherEntity;
-use App\Usecase\Usecase\Author\CreateAuthorUseCase;
-use App\Usecase\Usecase\AuthorBook\CreateAuthorBookUseCase;
-use App\Usecase\Usecase\Book\CreateBookUseCase;
-use App\Usecase\Usecase\Publisher\CreatePublisherUseCase;
+use App\UseCase\UseCase\Author\CreateAuthorUseCase;
+use App\UseCase\UseCase\AuthorBook\CreateAuthorBookUseCase;
+use App\UseCase\UseCase\Book\CreateBookUseCase;
+use App\UseCase\UseCase\Publisher\CreatePublisherUseCase;
 use Carbon\CarbonImmutable;
 use Illuminate\Console\Command;
 

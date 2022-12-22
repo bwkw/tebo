@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Usecase\Usecase\Publisher;
+namespace App\UseCase\UseCase\Publisher;
 
 use App\Domain\DomainService\PublisherDomainService;
 use App\Domain\DTO\PublisherDto;
