@@ -47,7 +47,6 @@ jobs:
 
       - name: Laravel Settings
         run: |
-          docker-compose exec -T app cp .env.example .env=testing
           docker-compose exec -T app php artisan key:generate --env=testing
           docker-compose exec -T app php artisan storage:link
 
