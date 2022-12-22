@@ -45,7 +45,7 @@ jobs:
         run: docker-compose exec -T app composer phpcs
 
       - name: Next Format
-        run: docker compose exec client npm run lint
+        run: docker-compose exec -T client npm run lint
 
       - name: Laravel Version
         run: docker-compose exec -T app php artisan --version
