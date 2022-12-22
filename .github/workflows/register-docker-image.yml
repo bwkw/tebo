@@ -3,7 +3,7 @@ name: Register Docker Image
 on:
   pull_request:
     paths:
-      - 'infra/docker/*'
+      - 'infra/docker/**'
 
 jobs:
   register-docker-image:
