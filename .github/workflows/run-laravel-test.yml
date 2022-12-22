@@ -42,9 +42,6 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: docker-compose exec -T app composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
 
-      - name: Composer Dump Autoload
-        run: docker-compose exec -T app composer dump-autoload -q
-
       - name: Laravel Settings
         run: |
           docker-compose exec -T app cp .env.example .env
