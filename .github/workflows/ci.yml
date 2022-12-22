@@ -46,20 +46,17 @@ jobs:
           docker-compose exec -T app php artisan key:generate --env=testing
           docker-compose exec -T app php artisan storage:link
 
-      - name: Npm Ci
-        run: |
-          npm install
-          npm ci
+      - name: Npm Install
+        run: docker-compose exec -T　client npm install
 
       - name: Laravel Version
         run: docker-compose exec -T app php artisan --version
-
 
       - name: Laravel Format
         run: docker-compose exec -T app composer phpcs
 
       - name: Next Format
-        run: npm run lint
+        run: docker-compose exec -T　client npm run lint
 
       - name: Laravel Migrate
         run: docker-compose exec -T app php artisan migrate --env=testing
