@@ -1,16 +1,16 @@
 # イメージをビルドするためのベースイメージを設定する（https://hub.docker.com/_/php）
 FROM php:8.1-fpm
 
-RUN apt-get update && \
-    apt-get install -y git unzip libzip-dev libicu-dev libonig-dev && \
-    pecl install xdebug && \
-    docker-php-ext-enable xdebug && \
-    docker-php-ext-install intl pdo_mysql zip bcmath
 # RUNはコンテナビルド時に実行するコマンドを書く
 ## && で複数のコマンドをつなぎ、 \ で改行する
 ### apt-get update ：インストール可能なパッケージの「一覧」を更新
 ### apt-get -y install：パッケージをインストール
 ### docker-php-ext-install：PHPの拡張ライブラリをインストール（※Laravelのインストールや開発に必要な（もしくは便利な）パッケージや拡張ライブラリをインストール）
+RUN apt-get update && \
+    apt-get install -y git unzip libzip-dev libicu-dev libonig-dev && \
+    pecl install xdebug && \
+    docker-php-ext-enable xdebug && \
+    docker-php-ext-install intl pdo_mysql zip bcmath
 
 COPY ./infra/docker/app/php.ini /usr/local/etc/php/php.ini
 # ローカルで（後ほど）作成する php.ini （PHPの設定ファイル）をDockerコンテナ内にコピー

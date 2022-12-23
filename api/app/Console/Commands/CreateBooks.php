@@ -15,29 +15,14 @@ use Illuminate\Console\Command;
 
 class CreateBooks extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'books:create';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
+    protected $signature = 'books:create {keyword}';
     protected $description = 'Create Book By Api';
+
     private CreateAuthorUseCase $createAuthorUseCase;
     private CreateBookUseCase $createBookUseCase;
     private CreatePublisherUseCase $createPublisherUseCase;
     private CreateAuthorBookUseCase $createAuthorBookUseCase;
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
     public function __construct(
         CreateAuthorUseCase $createAuthorUseCase,
         CreateAuthorBookUseCase $createAuthorBookUseCase,
@@ -51,15 +36,10 @@ class CreateBooks extends Command
         $this->createPublisherUseCase = $createPublisherUseCase;
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return void
-     */
     public function handle(): void
     {
-        $keyword = 'ドメイン駆動設計';
-        $maxResults = 1;
+        $keyword = $this->argument('keyword');
+        $maxResults = 10;
         $googleBooksApiBaseUrl = 'https://www.googleapis.com/books/v1/volumes';
         $openBdApiBaseUrl = 'https://api.openbd.jp/v1/get?isbn=';
         $googleBooksApiBaseUrl .= '?q=' . $keyword . '&maxResults=' . $maxResults;
@@ -70,18 +50,25 @@ class CreateBooks extends Command
             $results = json_decode(file_get_contents($googleBooksApiUrl))->items;
             foreach ($results as $result) {
 //                todo: APIでキーワード（Java, テスト等)も取れるのでいつか使う
-//                $industryIdentifiers = $result->volumeInfo->industryIdentifiers ?? null;
-//                if (!$industryIdentifiers) continue;
-//                $newIndustryIdentifiers = array_column($industryIdentifiers, 'identifier', 'type');
-//                if (array_key_exists('ISBN_13', $newIndustryIdentifiers)) {
-//                    $isbn = $newIndustryIdentifiers['ISBN_13'];
-//                } elseif (array_key_exists('ISBN_10', $newIndustryIdentifiers)) {
-//                    $isbn = $newIndustryIdentifiers['ISBN_10'];
-//                } else {
-//                    continue;
-//                }
-//                $openBdApiUrl = $openBdApiBaseUrl . $isbn;
-//                $summary = json_decode(file_get_contents($openBdApiUrl))[0]->summary;
+                $industryIdentifiers = $result->volumeInfo->industryIdentifiers ?? null;
+                if (!$industryIdentifiers) {
+                    continue;
+                }
+                $newIndustryIdentifiers = array_column($industryIdentifiers, 'identifier', 'type');
+                if (array_key_exists('ISBN_13', $newIndustryIdentifiers)) {
+                    $isbn = $newIndustryIdentifiers['ISBN_13'];
+                } elseif (array_key_exists('ISBN_10', $newIndustryIdentifiers)) {
+                    $isbn = $newIndustryIdentifiers['ISBN_10'];
+                } else {
+                    continue;
+                }
+
+                $openBdApiUrl = $openBdApiBaseUrl . $isbn;
+                if (json_decode(file_get_contents($openBdApiUrl))[0]) {
+                    $summary = json_decode(file_get_contents($openBdApiUrl))[0]->summary;
+                } else {
+                    continue;
+                }
 
                 $publisher = $result->volumeInfo->publisher ?? null;
                 if ($publisher) {
@@ -93,7 +80,8 @@ class CreateBooks extends Command
                 }
                 $title = $result->volumeInfo->title;
                 $description = $result->volumeInfo->description ?? ""; //説明はGoogleBooksApiで十分そう
-                $coverImageUrl = $result->volumeInfo->imageLinks->thumbnail ?? "";
+//                $coverImageUrl = $result->volumeInfo->imageLinks->thumbnail ?? "";
+                $coverImageUrl = $summary->cover ?? "";
                 $page = $result->volumeInfo->pageCount ?? 0; //ページ数はGoogleBooksApiの方がデータ持ってる
                 $publishedDate =
                     new CarbonImmutable($result->volumeInfo->publishedDate) ??
