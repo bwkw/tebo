@@ -2,7 +2,8 @@ import { FC } from 'react'
 
 import { Card, Col, Row } from '@nextui-org/react'
 
-import { Button94f9f0 } from 'components/elements/Button/Button94f9f0'
+import { BuyButtonED9734 } from 'components/elements/Button/BuyButtonED9734'
+import { InfoButton86878A } from 'components/elements/Button/InfoButton86878A'
 import { BookType } from 'features/book/types'
 
 export const BookImageCard: FC<BookType> = ({ book }) => (
@@ -23,14 +24,14 @@ export const BookImageCard: FC<BookType> = ({ book }) => (
         bgBlur: '#0f111466',
         borderTop: '$borderWeights$light solid $gray800',
         bottom: 0,
-        zIndex: 1,
-        height: 12,
+        padding: 0,
       }}
     >
       <Row>
         <Col>
-          <Row justify='flex-end'>
-            <Button94f9f0 text={'Detail'} url={`/books/${book.id}`} />
+          <Row justify='center'>
+            <BuyButtonED9734 text={'Buy'} url={`/books/${book.id}/buy`} />
+            <InfoButton86878A text={'Detail'} url={`/books/${book.id}`} />
           </Row>
         </Col>
       </Row>

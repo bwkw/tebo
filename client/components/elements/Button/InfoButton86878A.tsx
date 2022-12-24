@@ -8,7 +8,7 @@ import { ButtonType } from 'types/Button'
 
 export const InfoButton86878A: FC<ButtonType> = (props) => {
   return (
-    <Button flat auto rounded css={{ color: '#ffffff', bgColor: '#86878A' }}>
+    <Button flat auto css={{ color: '#ffffff', bgColor: '#86878A' }}>
       <ImInfo className={'pr-1'} />
       <Link href={props.url}>
         <Text css={{ color: 'inherit' }} size={12} weight='bold'>
