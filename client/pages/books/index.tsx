@@ -1,4 +1,4 @@
-import { Grid } from '@nextui-org/react'
+import { Grid, Text } from '@nextui-org/react'
 
 import type { GetServerSideProps, NextPage } from 'next'
 
@@ -17,15 +17,18 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
 const Book: NextPage<BookIndexType> = ({ books }) => {
   return (
-    <Grid.Container gap={4} justify='center'>
-      {books.map((book: FetchBookType, index: number) => {
-        return (
-          <Grid xs={2} key={index}>
-            <BookImageCard book={book} />
-          </Grid>
-        )
-      })}
-    </Grid.Container>
+    <>
+      <Text className='text-center underline underline-offset-4 font-bold text-2xl text-white mb-6'>本の一覧</Text>
+      <Grid.Container gap={4} justify='center'>
+        {books.map((book: FetchBookType, index: number) => {
+          return (
+            <Grid xs={2} key={index}>
+              <BookImageCard book={book} />
+            </Grid>
+          )
+        })}
+      </Grid.Container>
+    </>
   )
 }
 
