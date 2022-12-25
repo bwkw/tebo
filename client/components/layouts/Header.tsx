@@ -17,7 +17,7 @@ export const Header = () => {
         <Link href='/'>
           <a className='flex items-center'>
             <Image src='/images/tebo.png' alt='logo' width='60px' height='60px' />
-            <span className='self-center text-xl font-semibold whitespace-nowrap dark:text-white'>Tebo</span>
+            <span className='self-center text-3xl font-semibold whitespace-nowrap dark:text-white p-2'>Tebo</span>
           </a>
         </Link>
         <div className='hidden w-full md:block md:w-auto' id='navbar-default'>
@@ -25,7 +25,7 @@ export const Header = () => {
             {isLogin ? (
               <>
                 {loginMenuLists.map((value, index) => (
-                  <li key={index} className='text-white block pl-3 pr-4 rounded md:bg-transparent md:p-0'>
+                  <li key={index} className='text-white block rounded md:bg-transparent m-0 py-0 pl-3 pr-4'>
                     <Link href={value.link}>{value.name}</Link>
                   </li>
                 ))}
