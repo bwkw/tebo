@@ -61,7 +61,7 @@ class BookEntity
     public function id(): int
     {
         if ($this->id === null) {
-            throw new LogicException("Repositoryを通す前にこのメソッドを呼び出さないでください。");
+            throw new LogicException('Repositoryを通す前にこのメソッドを呼び出さないでください。');
         }
 
         return $this->id;

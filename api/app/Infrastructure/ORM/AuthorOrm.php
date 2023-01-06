@@ -11,8 +11,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  */
 class AuthorOrm extends Model
 {
-    protected $table = "authors";
-    protected $guarded = ["id", "created_at", "updated_at"];
+    protected $table = 'authors';
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public function books(): BelongsToMany
     {

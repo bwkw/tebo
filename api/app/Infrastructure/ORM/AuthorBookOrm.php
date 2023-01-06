@@ -11,6 +11,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class AuthorBookOrm extends Model
 {
-    protected $table = "author_book";
-    protected $guarded = ["id", "created_at", "updated_at"];
+    protected $table = 'author_book';
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 }
