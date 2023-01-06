@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('publishers', function (Blueprint $table) {
             $table->id();
-            $table->string("name")->unique();
+            $table->string('name')->unique();
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
         });

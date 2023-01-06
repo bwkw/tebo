@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
-            $table->string("title")->unique();
-            $table->Text("description");
-            $table->string("cover_image_url");
-            $table->integer("page");
+            $table->string('title')->unique();
+            $table->Text('description');
+            $table->string('cover_image_url');
+            $table->integer('page');
             $table->date('published_date');
             $table->foreignId('publisher_id')->nullable()->constrained('publishers');
             $table->dateTime('created_at');
