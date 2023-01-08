@@ -1,8 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./components/**/*.tsx', './pages/**/*.tsx'],
+  content: ['features/**/*.tsx', 'pages/**/*.tsx', 'components/**/*.tsx'],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        // 'カラー名': 'カラーコード'
+        navy: '#151321',
+      },
+    },
   },
   plugins: [],
 }
