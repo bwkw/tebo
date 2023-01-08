@@ -1,4 +1,4 @@
-export type ButtonType = {
+export type OnClickButtonType = {
   text: string
-  url: string
+  color: string
 }
