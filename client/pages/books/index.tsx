@@ -2,7 +2,7 @@ import { Grid, Text } from '@nextui-org/react'
 
 import type { GetServerSideProps, NextPage } from 'next'
 
-import { BookImageCard } from 'components/elements/Card/BookImageCard'
+import { BookImageCard } from 'features/book/components/BookImageCard'
 import { BookIndexType, FetchBookType } from 'features/book/types'
 import { axios } from 'libs/axios'
 
