@@ -14,6 +14,8 @@
     <arg value="ps" />
 
     <!-- 除外ディレクトリ -->
+    <exclude-pattern>client/</exclude-pattern>
+    <exclude-pattern>infra/</exclude-pattern>
     <exclude-pattern>/bootstrap/</exclude-pattern>
     <exclude-pattern>/config/</exclude-pattern>
     <exclude-pattern>/database/</exclude-pattern>
