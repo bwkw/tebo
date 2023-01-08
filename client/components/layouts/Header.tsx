@@ -12,7 +12,7 @@ export const Header = () => {
   ]
 
   return (
-    <nav className='flex bg-black bg-opacity-90 sticky top-0 px-2 sm:px-4 py-2.5 rounded z-50'>
+    <nav className='flex bg-black bg-opacity-90 sticky top-0 px-2 sm:px-4 py-2.5 z-50 border-b border-gray-700'>
       <div className='container flex flex-wrap items-center justify-between mx-auto'>
         <Link href='/'>
           <a className='flex items-center'>
@@ -33,7 +33,7 @@ export const Header = () => {
             ) : (
               <>
                 {notLoginMenuLists.map((value, index) => (
-                  <li key={index} className='text-white block py-2 pl-3 pr-4 rounded md:bg-transparent md:p-0'>
+                  <li key={index} className='text-white block py-2 pl-3 pr-4 rounded md:bg-transparent p-0 m-0'>
                     <Link href={value.link}>{value.name}</Link>
                   </li>
                 ))}
