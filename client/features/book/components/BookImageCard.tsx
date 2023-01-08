@@ -2,8 +2,8 @@ import { FC } from 'react'
 
 import { Card, Col, Row } from '@nextui-org/react'
 
-import { BuyButtonED9734 } from 'components/elements/Button/BuyButtonED9734'
-import { InfoButton86878A } from 'components/elements/Button/InfoButton86878A'
+import { BuyButtonED9734 } from 'components/elements/button/BuyButtonED9734'
+import { InfoButton86878A } from 'components/elements/button/InfoButton86878A'
 import { BookType } from 'features/book/types'
 
 export const BookImageCard: FC<BookType> = ({ book }) => (

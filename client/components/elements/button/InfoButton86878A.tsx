@@ -4,7 +4,7 @@ import { Button, Text } from '@nextui-org/react'
 import Link from 'next/link'
 import { ImInfo } from 'react-icons/im'
 
-import { ButtonType } from 'types/Button'
+import { ButtonType } from 'types/button'
 
 export const InfoButton86878A: FC<ButtonType> = (props) => {
   return (

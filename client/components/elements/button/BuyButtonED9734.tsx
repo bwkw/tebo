@@ -4,7 +4,7 @@ import { Button, Text } from '@nextui-org/react'
 import Link from 'next/link'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 
-import { ButtonType } from 'types/Button'
+import { ButtonType } from 'types/button'
 
 export const BuyButtonED9734: FC<ButtonType> = (props) => {
   return (
