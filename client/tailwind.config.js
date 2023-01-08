@@ -4,7 +4,6 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // 'カラー名': 'カラーコード'
         navy: '#151321',
       },
     },
