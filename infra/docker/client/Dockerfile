@@ -1,3 +1,5 @@
-FROM node:16-alpine3.15
+FROM node:16-slim
 
+COPY client/package* .
 WORKDIR /client
+RUN npm install
