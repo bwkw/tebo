@@ -1,7 +1,9 @@
 build:
 	docker compose build --no-cache --force-rm
 init:
-	docker compose up -d --build
+	@make build
+	docker compose run client npm install
+	@make up
 	docker compose exec app composer install
 	docker compose exec app cp .env.example .env
 	docker compose exec app php artisan key:generate
@@ -18,6 +20,9 @@ ps:
 	docker compose ps
 app:
 	docker compose exec app bash
+.PHONY: client
+client:
+	docker compose exec client sh
 db:
 	docker compose exec db bash
 db-migrate:

@@ -1,5 +1,7 @@
 FROM node:16-slim
 
-COPY client/package* .
 WORKDIR /client
+COPY ./client/package* .
 RUN npm install
+
+CMD ["npm", "run", "dev"]

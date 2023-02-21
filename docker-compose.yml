@@ -39,8 +39,6 @@ services:
         source: ./client
         target: /client
     tty: true
-    command:
-      sh -c "npm run dev"
     environment:
       - CHOKIDAR_USEPOLLING=true  # HotReload用
 
