@@ -7,7 +7,14 @@ FROM php:8.1-fpm
 ### apt-get -y install：パッケージをインストール
 ### docker-php-ext-install：PHPの拡張ライブラリをインストール（※Laravelのインストールや開発に必要な（もしくは便利な）パッケージや拡張ライブラリをインストール）
 RUN apt-get update && \
-    apt-get install -y git unzip libzip-dev libicu-dev libonig-dev && \
+    apt-get -y install --no-install-recommends \
+      git \
+      unzip \
+      libzip-dev \
+      libicu-dev \
+      libonig-dev && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
     pecl install xdebug && \
     docker-php-ext-enable xdebug && \
     docker-php-ext-install intl pdo_mysql zip bcmath
