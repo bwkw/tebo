@@ -22,7 +22,9 @@ app:
 	docker compose exec app bash
 .PHONY: client
 client:
-	docker compose exec client sh
+	docker compose exec client bash
+nginx-log:
+	docker compose logs -f web
 db:
 	docker compose exec db bash
 db-migrate:
@@ -45,3 +47,5 @@ phpcs:
 	docker compose exec app composer phpcs
 phpcbf:
 	docker compose exec app composer phpcbf
+error-log:
+	docker compose logs | grep error
