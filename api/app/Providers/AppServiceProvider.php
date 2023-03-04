@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use App\Domain\RepositoryInterface\AuthorBookRepositoryInterface;
-use App\Domain\RepositoryInterface\AuthorRepositoryInterface;
-use App\Domain\RepositoryInterface\BookRepositoryInterface;
-use App\Domain\RepositoryInterface\PublisherRepositoryInterface;
+use App\Domain\Author\AuthorRepositoryInterface;
+use App\Domain\AuthorBook\AuthorBookRepositoryInterface;
+use App\Domain\Book\BookRepositoryInterface;
+use App\Domain\Publisher\PublisherRepositoryInterface;
 use App\Infrastructure\Repository\RDB\AuthorBookRepository;
 use App\Infrastructure\Repository\RDB\AuthorRepository;
 use App\Infrastructure\Repository\RDB\BookRepository;

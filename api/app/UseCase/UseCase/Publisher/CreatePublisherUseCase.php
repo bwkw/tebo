@@ -2,10 +2,10 @@
 
 namespace App\UseCase\UseCase\Publisher;
 
-use App\Domain\DomainService\PublisherDomainService;
-use App\Domain\DTO\PublisherDto;
-use App\Domain\Entity\PublisherEntity;
-use App\Domain\RepositoryInterface\PublisherRepositoryInterface;
+use App\Domain\Publisher\PublisherDomainService;
+use App\Domain\Publisher\PublisherDto;
+use App\Domain\Publisher\PublisherEntity;
+use App\Domain\Publisher\PublisherRepositoryInterface;
 
 class CreatePublisherUseCase
 {

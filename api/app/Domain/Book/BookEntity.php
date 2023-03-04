@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Domain\Entity;
+namespace App\Domain\Book;
 
-use App\Domain\DTO\BookDto;
 use Carbon\CarbonImmutable;
 use LogicException;
 

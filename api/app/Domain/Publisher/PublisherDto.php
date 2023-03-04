@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain\DTO;
+namespace App\Domain\Publisher;
 
-class AuthorDto
+class PublisherDto
 {
     public readonly int $id;
     public readonly string $name;

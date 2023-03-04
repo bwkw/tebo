@@ -1,9 +1,6 @@
 <?php
 
-namespace App\Domain\RepositoryInterface;
-
-use App\Domain\DTO\PublisherDto;
-use App\Domain\Entity\PublisherEntity;
+namespace App\Domain\Publisher;
 
 interface PublisherRepositoryInterface
 {

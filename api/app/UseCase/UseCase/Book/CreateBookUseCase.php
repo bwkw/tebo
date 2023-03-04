@@ -2,10 +2,10 @@
 
 namespace App\UseCase\UseCase\Book;
 
-use App\Domain\DomainService\BookDomainService;
-use App\Domain\DTO\BookDto;
-use App\Domain\Entity\BookEntity;
-use App\Domain\RepositoryInterface\BookRepositoryInterface;
+use App\Domain\Book\BookDomainService;
+use App\Domain\Book\BookDto;
+use App\Domain\Book\BookEntity;
+use App\Domain\Book\BookRepositoryInterface;
 
 class CreateBookUseCase
 {

@@ -2,10 +2,10 @@
 
 namespace App\UseCase\UseCase\Author;
 
-use App\Domain\DomainService\AuthorDomainService;
-use App\Domain\DTO\AuthorDto;
-use App\Domain\Entity\AuthorEntity;
-use App\Domain\RepositoryInterface\AuthorRepositoryInterface;
+use App\Domain\Author\AuthorDomainService;
+use App\Domain\Author\AuthorDto;
+use App\Domain\Author\AuthorEntity;
+use App\Domain\Author\AuthorRepositoryInterface;
 
 class CreateAuthorUseCase
 {

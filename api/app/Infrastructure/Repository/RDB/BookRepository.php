@@ -2,9 +2,9 @@
 
 namespace App\Infrastructure\Repository\RDB;
 
-use App\Domain\DTO\BookDto;
-use App\Domain\Entity\BookEntity;
-use App\Domain\RepositoryInterface\BookRepositoryInterface;
+use App\Domain\Book\BookDto;
+use App\Domain\Book\BookEntity;
+use App\Domain\Book\BookRepositoryInterface;
 use App\Infrastructure\ORM\BookOrm;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 

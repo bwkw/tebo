@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Domain\Entity;
+namespace App\Domain\Author;
 
-use App\Domain\DTO\PublisherDto;
 use LogicException;
 
-class PublisherEntity
+class AuthorEntity
 {
     private readonly ?int $id;
     public readonly string $name;
@@ -44,9 +43,9 @@ class PublisherEntity
         return $this->id;
     }
 
-    public function toDto(): PublisherDto
+    public function toDto(): AuthorDto
     {
-        return new PublisherDto(
+        return new AuthorDto(
             $this->id,
             $this->name,
         );

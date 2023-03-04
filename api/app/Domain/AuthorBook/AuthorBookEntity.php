@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Domain\Entity;
+namespace App\Domain\AuthorBook;
 
-use App\Domain\DTO\AuthorBookDto;
 use LogicException;
 
 class AuthorBookEntity
