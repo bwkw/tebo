@@ -4,10 +4,10 @@ namespace App\Domain\Author;
 
 use LogicException;
 
-class AuthorEntity
+readonly class AuthorEntity
 {
-    private readonly ?int $id;
-    public readonly string $name;
+    private ?int $id;
+    public string $name;
 
     private function __construct(
         ?int $id,

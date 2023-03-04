@@ -2,10 +2,10 @@
 
 namespace App\Domain\Publisher;
 
-class PublisherDto
+readonly class PublisherDto
 {
-    public readonly int $id;
-    public readonly string $name;
+    public int $id;
+    public string $name;
 
     public function __construct(
         int $id,
