@@ -1,6 +1,6 @@
 import type { GetServerSideProps, NextPage } from 'next'
 
-import { fetchBookType } from 'features/book/types'
+import { FetchBookType } from 'features/book/types'
 import { axios } from 'libs/axios'
 
 export const getServerSideProps: GetServerSideProps = async () => {
@@ -11,9 +11,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
   return { props: { books } }
 }
 
-const Home: NextPage<fetchBookType> = (books) => {
+const Home: NextPage<FetchBookType> = (books) => {
   console.log(books)
-  return <div className='underline'>テスト</div>
+  return <div className='underline'>テス</div>
 }
 
 export default Home

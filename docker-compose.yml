@@ -52,11 +52,6 @@ services:
         protocol: tcp
         mode: host  #hostは各ノード上のホスト側ポートで公開。または、ingressは負荷分散されたポートで公開。
     volumes:
-      - type: volume
-        source: php-fpm-socket
-        target: /var/run/php-fpm
-        volume:
-          nocopy: true  #ボリュームを作成しても、コンテナからのデータのコピーを無効にするフラグ
       - type: bind
         source: ./api
         target: /app
