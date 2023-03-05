@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "eslint": "eslint '{**/*,*}.{js,ts,jsx,tsx,html}'",
+    "eslint-fix": "eslint '{**/*,*}.{js,ts,jsx,tsx,html}' --fix",
+    "prettier": "eslint '{**/*,*}.{js,ts,jsx,tsx,html}'",
+    "prettier-fix": "eslint '{**/*,*}.{js,ts,jsx,tsx,html}' --fix"
   },
   "dependencies": {
     "@nextui-org/react": "^1.0.0-beta.10",
@@ -27,6 +31,7 @@
     "eslint": "8.22.0",
     "eslint-config-next": "^13.0.2",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-tailwindcss": "^3.10.1",
     "postcss": "^8.4.18",
     "prettier": "^2.7.1",
     "tailwindcss": "^3.2.1",

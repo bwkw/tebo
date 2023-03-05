@@ -18,7 +18,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 const Book: NextPage<BookIndexType> = ({ books }) => {
   return (
     <>
-      <Text className='text-center underline underline-offset-4 font-bold text-2xl text-white mb-6'>本の一覧</Text>
+      <Text className='mb-6 text-center text-2xl font-bold text-white underline underline-offset-4'>本の一覧</Text>
       <Grid.Container gap={4} justify='center'>
         {books.map((book: FetchBookType, index: number) => {
           return (
