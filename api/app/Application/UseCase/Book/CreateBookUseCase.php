@@ -1,6 +1,6 @@
 <?php
 
-namespace App\UseCase\UseCase\Book;
+namespace App\Application\UseCase\Book;
 
 use App\Domain\Book\BookDomainService;
 use App\Domain\Book\BookDto;
