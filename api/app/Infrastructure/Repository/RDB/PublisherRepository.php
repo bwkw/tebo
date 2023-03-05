@@ -2,9 +2,9 @@
 
 namespace App\Infrastructure\Repository\RDB;
 
-use App\Domain\DTO\PublisherDto;
-use App\Domain\Entity\PublisherEntity;
-use App\Domain\RepositoryInterface\PublisherRepositoryInterface;
+use App\Domain\Publisher\PublisherDto;
+use App\Domain\Publisher\PublisherEntity;
+use App\Domain\Publisher\PublisherRepositoryInterface;
 use App\Infrastructure\ORM\PublisherOrm;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 

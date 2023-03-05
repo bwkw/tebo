@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Domain\Entity;
+namespace App\Domain\AuthorBook;
 
-use App\Domain\DTO\AuthorBookDto;
 use LogicException;
 
-class AuthorBookEntity
+readonly class AuthorBookEntity
 {
-    private readonly ?int $id;
-    public readonly ?int $authorId;
-    public readonly int $bookId;
+    private ?int $id;
+    public ?int $authorId;
+    public int $bookId;
 
     private function __construct(
         ?int $id,

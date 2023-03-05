@@ -1,9 +1,7 @@
 <?php
 
-namespace App\Domain\DomainService;
+namespace App\Domain\Publisher;
 
-use App\Domain\Entity\PublisherEntity;
-use App\Domain\RepositoryInterface\PublisherRepositoryInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class PublisherDomainService

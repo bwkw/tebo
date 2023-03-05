@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
-use App\Domain\Entity\AuthorBookEntity;
-use App\Domain\Entity\AuthorEntity;
-use App\Domain\Entity\BookEntity;
-use App\Domain\Entity\PublisherEntity;
+use App\Domain\Author\AuthorEntity;
+use App\Domain\AuthorBook\AuthorBookEntity;
+use App\Domain\Book\BookEntity;
+use App\Domain\Publisher\PublisherEntity;
 use App\UseCase\UseCase\Author\CreateAuthorUseCase;
 use App\UseCase\UseCase\AuthorBook\CreateAuthorBookUseCase;
 use App\UseCase\UseCase\Book\CreateBookUseCase;

@@ -1,9 +1,6 @@
 <?php
 
-namespace App\Domain\RepositoryInterface;
-
-use App\Domain\DTO\AuthorDto;
-use App\Domain\Entity\AuthorEntity;
+namespace App\Domain\Author;
 
 interface AuthorRepositoryInterface
 {

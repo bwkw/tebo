@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Domain\DTO;
+namespace App\Domain\Author;
 
-class PublisherDto
+readonly class AuthorDto
 {
-    public readonly int $id;
-    public readonly string $name;
+    public int $id;
+    public string $name;
 
     public function __construct(
         int $id,

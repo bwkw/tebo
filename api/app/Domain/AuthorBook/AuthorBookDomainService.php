@@ -1,9 +1,7 @@
 <?php
 
-namespace App\Domain\DomainService;
+namespace App\Domain\AuthorBook;
 
-use App\Domain\Entity\AuthorBookEntity;
-use App\Domain\RepositoryInterface\AuthorBookRepositoryInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class AuthorBookDomainService

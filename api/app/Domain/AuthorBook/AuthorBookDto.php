@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Domain\DTO;
+namespace App\Domain\AuthorBook;
 
-class AuthorBookDto
+readonly class AuthorBookDto
 {
-    public readonly int $id;
-    public readonly ?int $authorId;
-    public readonly int $bookId;
+    public int $id;
+    public ?int $authorId;
+    public int $bookId;
 
     public function __construct(
         int $id,

@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Domain\Entity;
+namespace App\Domain\Book;
 
-use App\Domain\DTO\BookDto;
 use Carbon\CarbonImmutable;
 use LogicException;
 
-class BookEntity
+readonly class BookEntity
 {
-    private readonly ?int $id;
-    public readonly string $title;
-    public readonly string $description;
-    public readonly string $coverImageUrl;
-    public readonly int $page;
-    public readonly CarbonImmutable $publishedDate;
-    public readonly ?int $publisherId;
+    private ?int $id;
+    public string $title;
+    public string $description;
+    public string $coverImageUrl;
+    public int $page;
+    public CarbonImmutable $publishedDate;
+    public ?int $publisherId;
 
     private function __construct(
         ?int $id,

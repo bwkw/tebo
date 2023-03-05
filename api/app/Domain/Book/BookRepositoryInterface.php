@@ -1,9 +1,6 @@
 <?php
 
-namespace App\Domain\RepositoryInterface;
-
-use App\Domain\DTO\BookDto;
-use App\Domain\Entity\BookEntity;
+namespace App\Domain\Book;
 
 interface BookRepositoryInterface
 {

@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Domain\DTO;
+namespace App\Domain\Book;
 
 use Carbon\CarbonImmutable;
 
-class BookDto
+readonly class BookDto
 {
-    public readonly int $id;
-    public readonly string $title;
-    public readonly string $description;
-    public readonly string $coverImageUrl;
-    public readonly int $page;
-    public readonly CarbonImmutable $publishedDate;
-    public readonly ?int $publisherId;
+    public int $id;
+    public string $title;
+    public string $description;
+    public string $coverImageUrl;
+    public int $page;
+    public CarbonImmutable $publishedDate;
+    public ?int $publisherId;
 
     public function __construct(
         int $id,

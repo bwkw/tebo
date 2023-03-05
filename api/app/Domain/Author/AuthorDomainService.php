@@ -1,9 +1,7 @@
 <?php
 
-namespace App\Domain\DomainService;
+namespace App\Domain\Author;
 
-use App\Domain\Entity\AuthorEntity;
-use App\Domain\RepositoryInterface\AuthorRepositoryInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class AuthorDomainService
