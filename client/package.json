@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "eslint": "eslint '{**/*,*}.{js,ts,jsx,tsx,html}'",
+    "eslint-fix": "eslint '{**/*,*}.{js,ts,jsx,tsx,html}' --fix",
+    "prettier": "eslint '{**/*,*}.{js,ts,jsx,tsx,html}'",
+    "prettier-fix": "eslint '{**/*,*}.{js,ts,jsx,tsx,html}' --fix"
   },
   "dependencies": {
     "@nextui-org/react": "^1.0.0-beta.10",
