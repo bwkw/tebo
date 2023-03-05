@@ -9,13 +9,11 @@ import { BookType } from 'features/book/types'
 export const BookImageCard: FC<BookType> = ({ book }) => (
   <Card css={{ w: '100%', h: 'auto' }}>
     <Card.Body css={{ p: 0 }}>
-      <Card.Image
-        src={book.cover_image_url}
-        objectFit='cover'
-        width='100%'
-        height='100%'
-        alt='Relaxing app background'
-      />
+      {book.cover_image_url ? (
+        <Card.Image src={book.cover_image_url} alt={book.title} width={'100%'} height={'100%'} objectFit={'cover'} />
+      ) : (
+        <Card.Image src={'images/noImage.png'} alt={book.title} width={'100%'} height={'100%'} objectFit={'cover'} />
+      )}
     </Card.Body>
     <Card.Footer
       isBlurred
