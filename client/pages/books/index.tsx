@@ -2,7 +2,7 @@ import { Grid, Text } from '@nextui-org/react'
 
 import type { GetServerSideProps, NextPage } from 'next'
 
-import { BookImageCard } from 'components/elements/Card/BookImageCard'
+import { BookImageCard } from 'features/book/components/BookImageCard'
 import { BookIndexType, FetchBookType } from 'features/book/types'
 import { axios } from 'libs/axios'
 
@@ -22,7 +22,7 @@ const Book: NextPage<BookIndexType> = ({ books }) => {
       <Grid.Container gap={4} justify='center'>
         {books.map((book: FetchBookType, index: number) => {
           return (
-            <Grid xs={2} key={index}>
+            <Grid xs={3} key={index}>
               <BookImageCard book={book} />
             </Grid>
           )
