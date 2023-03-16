@@ -12,8 +12,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 }
 
 const Home: NextPage<FetchBookType> = (books) => {
-  console.log(books)
-  return <div className='underline'>テス</div>
+  return <div className='underline'>テスト</div>
 }
 
 export default Home
