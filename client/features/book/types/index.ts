@@ -18,3 +18,8 @@ export type BookIndexType = {
 export type BookType = {
   book: FetchBookType
 }
+
+export type BookFormDataType = {
+  title: string
+  description: string
+}

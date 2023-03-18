@@ -22,7 +22,7 @@ const Books: NextPage<BookIndexType> = ({ books }) => {
       <Grid.Container gap={4} justify='center'>
         {books.map((book: FetchBookType, index: number) => {
           return (
-            <Grid xs={3} key={index}>
+            <Grid xs={2} key={index}>
               <BookImageCard book={book} />
             </Grid>
           )
