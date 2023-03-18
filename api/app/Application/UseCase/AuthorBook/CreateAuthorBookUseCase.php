@@ -21,11 +21,18 @@ class CreateAuthorBookUseCase
     }
 
     /**
-     * @param AuthorBookEntity $authorBookEntity
+     * @param int|null $authorId
+     * @param int $bookId
+     *
      * @return AuthorBookDto
      */
-    public function execute(AuthorBookEntity $authorBookEntity): AuthorBookDto
+    public function execute(?int $authorId, int $bookId): AuthorBookDto
     {
+        $authorBookEntity = AuthorBookEntity::constructNewInstance(
+            $authorId,
+            $bookId,
+        );
+
         if ($this->authorBookDomainService->exists($authorBookEntity)) {
             return $this->authorBookRepository->getByAuthorIdBookId(
                 $authorBookEntity->authorId,

@@ -21,11 +21,14 @@ class CreateAuthorUseCase
     }
 
     /**
-     * @param AuthorEntity $authorEntity
+     * @param string $author
+     *
      * @return AuthorDto
      */
-    public function execute(AuthorEntity $authorEntity): AuthorDto
+    public function execute(string $author): AuthorDto
     {
+        $authorEntity = AuthorEntity::constructNewInstance($author);
+
         if ($this->authorDomainService->exists($authorEntity)) {
             return $this->authorRepository->getByName($authorEntity->name);
         }
