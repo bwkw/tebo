@@ -20,7 +20,7 @@ export const BookImageCard: FC<BookType> = ({ book }) => (
       css={{
         position: 'absolute',
         bgBlur: '#0f111466',
-        borderTop: '$borderWeights$light solid $gray800',
+        borderTop: '$borderWeights$light solid $gray500',
         bottom: 0,
         padding: 0,
       }}
