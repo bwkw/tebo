@@ -12,7 +12,7 @@ use App\Domain\Book\BookEntity;
 use App\Domain\Publisher\PublisherEntity;
 use Carbon\CarbonImmutable;
 
-class CallGoogleBooksApiUseCase
+class fetchBooksByGoogleBooksApiUseCase
 {
     private CreateAuthorUseCase $createAuthorUseCase;
     private CreateBookUseCase $createBookUseCase;
