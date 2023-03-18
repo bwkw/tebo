@@ -5,6 +5,16 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property $id
+ * @property $title
+ * @property $description
+ * @property $cover_image_url
+ * @property $page
+ * @property $published_date
+ * @property $created_at
+ * @property $updated_at
+ */
 class BookResource extends JsonResource
 {
     /**
