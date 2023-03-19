@@ -2,36 +2,24 @@
 
 namespace App\Console\Commands;
 
-use App\Application\UseCase\API\FetchBooksByGoogleBooksApiUseCase;
-use App\Application\UseCase\Author\CreateAuthorUseCase;
-use App\Application\UseCase\AuthorBook\CreateAuthorBookUseCase;
-use App\Application\UseCase\Book\CreateBookUseCase;
-use App\Application\UseCase\Publisher\CreatePublisherUseCase;
+use App\Application\UseCase\Bibliographies\CreateBibliographyUseCase;
+use App\Application\UseCase\Bibliographies\FetchbibliographiesByGoogleBooksApiUseCase;
 use Illuminate\Console\Command;
 
 class CreateBooks extends Command
 {
     protected $signature = 'books:create {keyword}';
     protected $description = 'Create Book By Api';
-    private CreateAuthorUseCase $createAuthorUseCase;
-    private CreateAuthorBookUseCase $createAuthorBookUseCase;
-    private CreateBookUseCase $createBookUseCase;
-    private CreatePublisherUseCase $createPublisherUseCase;
-    private FetchBooksByGoogleBooksApiUseCase $fetchBooksByGoogleBooksApiUseCase;
+    private CreateBibliographyUseCase $createBibliographyUseCase;
+    private FetchBibliographiesByGoogleBooksApiUseCase $fetchBibliographiesByGoogleBooksApiUseCase;
 
     public function __construct(
-        CreateAuthorUseCase $createAuthorUseCase,
-        CreateAuthorBookUseCase $createAuthorBookUseCase,
-        CreateBookUseCase $createBookUseCase,
-        CreatePublisherUseCase $createPublisherUseCase,
-        FetchBooksByGoogleBooksApiUseCase $fetchBooksByGoogleBooksApiUseCase
+        CreateBibliographyUseCase $createBibliographyUseCase,
+        FetchBibliographiesByGoogleBooksApiUseCase $fetchBibliographiesByGoogleBooksApiUseCase
     ) {
         parent::__construct();
-        $this->createAuthorUseCase = $createAuthorUseCase;
-        $this->createAuthorBookUseCase = $createAuthorBookUseCase;
-        $this->createBookUseCase = $createBookUseCase;
-        $this->createPublisherUseCase = $createPublisherUseCase;
-        $this->fetchBooksByGoogleBooksApiUseCase = $fetchBooksByGoogleBooksApiUseCase;
+        $this->createBibliographyUseCase = $createBibliographyUseCase;
+        $this->fetchBibliographiesByGoogleBooksApiUseCase = $fetchBibliographiesByGoogleBooksApiUseCase;
     }
 
     public function handle(): void
@@ -39,47 +27,24 @@ class CreateBooks extends Command
         $keyword = $this->argument('keyword');
         $count = 10;
 
-        $books = $this->fetchBooksByGoogleBooksApiUseCase->execute($keyword, $count);
-        foreach ($books as $book) {
-            $publisher = $book['publisher'];
-            $author = $book['author'];
-            $title = $book['title'];
-            $description = $book['description'];
-            $coverImageUrl = $book['coverImageUrl'];
-            $page = $book['page'];
-            $publishedDate = $book['publishedDate'];
+        $bibliographies = $this->fetchBibliographiesByGoogleBooksApiUseCase->execute($keyword, $count);
+        foreach ($bibliographies as $bibliography) {
+            $publisher = $bibliography['publisher'];
+            $author = $bibliography['author'];
+            $title = $bibliography['title'];
+            $description = $bibliography['description'];
+            $coverImageUrl = $bibliography['coverImageUrl'];
+            $page = $bibliography['page'];
+            $publishedDate = $bibliography['publishedDate'];
 
-            // 出版社データの作成
-            if ($publisher) {
-                $publisherDto = $this->createPublisherUseCase->execute($publisher);
-                $publisherId = $publisherDto->id;
-            } else {
-                $publisherId = null;
-            }
-
-            // 著者データの作成
-            if ($author) {
-                $authorDto = $this->createAuthorUseCase->execute($author);
-                $authorId = $authorDto->id;
-            } else {
-                $authorId = null;
-            }
-
-            // 本データの作成
-            $bookDto = $this->createBookUseCase->execute(
+            $this->createBibliographyUseCase->execute(
+                $publisher,
+                $author,
                 $title,
                 $description,
                 $coverImageUrl,
                 $page,
                 $publishedDate,
-                $publisherId,
-            );
-            $bookId = $bookDto->id;
-
-            // 著者と本データの紐付け
-            $this->createAuthorBookUseCase->execute(
-                $authorId,
-                $bookId,
             );
         }
     }

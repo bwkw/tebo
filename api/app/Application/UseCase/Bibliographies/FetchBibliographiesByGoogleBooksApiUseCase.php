@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Application\UseCase\API;
+namespace App\Application\UseCase\Bibliographies;
 
 use Carbon\CarbonImmutable;
 
-class FetchBooksByGoogleBooksApiUseCase
+class FetchBibliographiesByGoogleBooksApiUseCase
 {
     /**
      * @param string $keyword
@@ -18,7 +18,7 @@ class FetchBooksByGoogleBooksApiUseCase
         $openBdApiBaseUrl = 'https://api.openbd.jp/v1/get?isbn=';
         $googleBooksApiBaseUrl .= '?q=' . $keyword . '&maxResults=' . $maxResults;
 
-        $books = [];
+        $bibliographies = [];
         $iterationCount = floor($count / $maxResults);
         for ($i = 0; $i <= $iterationCount; $i++) {
             $startIndex = $maxResults * $i; // $startIndexは0始まり
@@ -56,7 +56,7 @@ class FetchBooksByGoogleBooksApiUseCase
                 $authors = $result->volumeInfo->authors ?? [null]; //著者はGoogleBooksApiの方がデータ持ってる
 
                 foreach ($authors as $author) {
-                    $book = [
+                    $bibliography = [
                         'title' => $title,
                         'description' => $description,
                         'coverImageUrl' => $coverImageUrl,
@@ -65,12 +65,12 @@ class FetchBooksByGoogleBooksApiUseCase
                         'publisher' => $publisher,
                         'author' => $author
                     ];
-                    $books[] = $book;
+                    $bibliographies[] = $bibliography;
                 }
             }
             sleep(2);
         }
 
-        return $books;
+        return $bibliographies;
     }
 }
