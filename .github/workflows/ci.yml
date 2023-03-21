@@ -25,6 +25,7 @@ jobs:
       - name: Docker Compose Build and Up
         run: |
           docker compose build
+          docker compose run client npm install
           docker compose up -d
 
       - name: Docker Compose Process
