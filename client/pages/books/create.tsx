@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from 'react'
 
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 import type { NextPage } from 'next'
 
@@ -8,6 +9,7 @@ import { BookFormDataType } from 'features/book/types'
 import { axios } from 'libs/axios'
 
 const BookCreateForm: NextPage = () => {
+  const router = useRouter()
   const [formData, setFormData] = useState<BookFormDataType>({
     title: '',
     description: '',
@@ -18,7 +20,10 @@ const BookCreateForm: NextPage = () => {
     setFormData({ ...formData, [name]: value })
   }
   const createBooks = () => {
-    axios.post('/api/books', formData).then((res) => res.data)
+    axios.post('/api/books', formData).then((res) => {
+      console.log(res.data)
+      router.push('/books')
+    })
   }
 
   return (
