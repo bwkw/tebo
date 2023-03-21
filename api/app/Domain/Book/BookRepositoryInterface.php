@@ -9,5 +9,6 @@ interface BookRepositoryInterface
      * @return BookDto[]
      */
     public function fetchAll(): array;
+    public function fetchById(int $id): BookDto;
     public function fetchByTitle(string $title): BookDto;
 }

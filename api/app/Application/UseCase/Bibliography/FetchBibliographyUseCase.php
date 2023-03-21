@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Application\UseCase\Bibliographies;
+namespace App\Application\UseCase\Bibliography;
 
+use A\B;
 use App\Application\DTO\BibliographyDto;
 use App\Application\QueryServiceInterface\BibliographyQueryServiceInterface;
 
-class FetchBibliographiesUseCase
+class FetchBibliographyUseCase
 {
     private BibliographyQueryServiceInterface $biographyQueryService;
 
@@ -16,10 +17,12 @@ class FetchBibliographiesUseCase
     }
 
     /**
-     * @return BibliographyDto[]
+     * @param int $bibliographyId
+     *
+     * @return BibliographyDto
      */
-    public function execute(): array
+    public function execute(int $bibliographyId): BibliographyDto
     {
-        return $this->biographyQueryService->fetchAll();
+        return $this->biographyQueryService->fetchByBibliographyId($bibliographyId);
     }
 }

@@ -10,4 +10,5 @@ interface BibliographyQueryServiceInterface
      * @return BibliographyDto[]
      */
     public function fetchAll(): array;
+    public function fetchByBibliographyId(int $bibliographyId): BibliographyDto;
 }

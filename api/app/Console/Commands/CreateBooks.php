@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Application\UseCase\Bibliographies\CreateBibliographyUseCase;
-use App\Application\UseCase\Bibliographies\FetchbibliographiesByGoogleBooksApiUseCase;
+use App\Application\UseCase\Bibliography\CreateBibliographyUseCase;
+use App\Application\UseCase\Bibliography\FetchbibliographiesByGoogleBooksApiUseCase;
 use Illuminate\Console\Command;
 
 class CreateBooks extends Command
@@ -29,22 +29,22 @@ class CreateBooks extends Command
 
         $bibliographies = $this->fetchBibliographiesByGoogleBooksApiUseCase->execute($keyword, $count);
         foreach ($bibliographies as $bibliography) {
-            $publisher = $bibliography['publisher'];
-            $author = $bibliography['author'];
             $title = $bibliography['title'];
             $description = $bibliography['description'];
             $coverImageUrl = $bibliography['coverImageUrl'];
             $page = $bibliography['page'];
             $publishedDate = $bibliography['publishedDate'];
+            $publisher = $bibliography['publisher'];
+            $authors = $bibliography['authors'];
 
             $this->createBibliographyUseCase->execute(
-                $publisher,
-                $author,
                 $title,
                 $description,
                 $coverImageUrl,
                 $page,
                 $publishedDate,
+                $publisher,
+                $authors,
             );
         }
     }

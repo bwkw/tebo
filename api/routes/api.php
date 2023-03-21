@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\BookController;
+use App\Http\Controllers\BibliographyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['prefix' => 'books'], function() {
-    Route::get('/', [BookController::class, 'fetchBooks']);
-    Route::get('/{bookId}', [BookController::class, 'fetchBook']);
+    Route::get('/', [BibliographyController::class, 'fetchBibliographies']);
+    Route::post('/', [BibliographyController::class, 'createBook']);
+    Route::get('/{bookId}', [BibliographyController::class, 'fetchBibliography']);
 });

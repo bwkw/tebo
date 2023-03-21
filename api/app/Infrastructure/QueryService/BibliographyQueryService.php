@@ -77,4 +77,45 @@ class BibliographyQueryService implements BibliographyQueryServiceInterface
 
         return $bibliographyDtos;
     }
+
+    public function fetchByBibliographyId(int $bibliographyId): BibliographyDto
+    {
+        $bookDto = $this->bookRepository->fetchById($bibliographyId);
+        $id = $bookDto->id;
+        $title = $bookDto->title;
+        $description = $bookDto->description;
+        $coverImageUrl = $bookDto->coverImageUrl;
+        $page = $bookDto->page;
+        $publishedDate = $bookDto->publishedDate;
+        $publisherId = $bookDto->publisherId;
+        if ($publisherId) {
+            $publisherDto = $this->publisherRepository->fetchById($publisherId);
+            $publisher = $publisherDto->name;
+        } else {
+            $publisher = null;
+        }
+        $authors = [];
+        $authorBookDtos = $this->authorBookRepository->fetchByBookId($id);
+        if ($authorBookDtos) {
+            foreach ($authorBookDtos as $authorBookDto) {
+                if ($authorBookDto->authorId) {
+                    $authorDto = $this->authorRepository->fetchById($authorBookDto->authorId);
+                    $authors[] = $authorDto->name;
+                }
+            }
+        } else {
+            $authors = null;
+        }
+
+        return new BibliographyDto(
+            $id,
+            $title,
+            $description,
+            $coverImageUrl,
+            $page,
+            $publishedDate,
+            $publisher,
+            $authors,
+        );
+    }
 }

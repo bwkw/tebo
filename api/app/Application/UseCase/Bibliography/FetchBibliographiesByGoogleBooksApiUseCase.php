@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\UseCase\Bibliographies;
+namespace App\Application\UseCase\Bibliography;
 
 use Carbon\CarbonImmutable;
 
@@ -9,6 +9,7 @@ class FetchBibliographiesByGoogleBooksApiUseCase
     /**
      * @param string $keyword
      * @param int $count
+     *
      * @return array
      */
     public function execute(string $keyword, int $count): array
@@ -55,18 +56,16 @@ class FetchBibliographiesByGoogleBooksApiUseCase
                     new CarbonImmutable("99991231");
                 $authors = $result->volumeInfo->authors ?? [null]; //著者はGoogleBooksApiの方がデータ持ってる
 
-                foreach ($authors as $author) {
-                    $bibliography = [
-                        'title' => $title,
-                        'description' => $description,
-                        'coverImageUrl' => $coverImageUrl,
-                        'page' => $page,
-                        'publishedDate' => $publishedDate,
-                        'publisher' => $publisher,
-                        'author' => $author
-                    ];
-                    $bibliographies[] = $bibliography;
-                }
+                $bibliography = [
+                    'title' => $title,
+                    'description' => $description,
+                    'coverImageUrl' => $coverImageUrl,
+                    'page' => $page,
+                    'publishedDate' => $publishedDate,
+                    'publisher' => $publisher,
+                    'authors' => $authors
+                ];
+                $bibliographies[] = $bibliography;
             }
             sleep(2);
         }

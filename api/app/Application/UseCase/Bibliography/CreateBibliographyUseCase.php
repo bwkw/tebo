@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Application\UseCase\Bibliographies;
+namespace App\Application\UseCase\Bibliography;
 
+use App\Application\DTO\BibliographyDto;
 use App\Application\UseCase\Author\CreateAuthorUseCase;
 use App\Application\UseCase\AuthorBook\CreateAuthorBookUseCase;
 use App\Application\UseCase\Book\CreateBookUseCase;
@@ -28,39 +29,31 @@ class CreateBibliographyUseCase
     }
 
     /**
-     * @param string|null $publisher
-     * @param string|null $author
      * @param string $title
      * @param string $description
      * @param string $coverImageUrl
      * @param int $page
      * @param CarbonImmutable $publishedDate
+     * @param string|null $publisher
+     * @param array|null $authors
      *
-     * @return void
+     * @return BibliographyDto
      */
     public function execute(
-        ?string $publisher,
-        ?string $author,
         string $title,
         string $description,
         string $coverImageUrl,
         int $page,
         CarbonImmutable $publishedDate,
-    ): void {
+        ?string $publisher,
+        ?array $authors,
+    ): BibliographyDto {
         // 出版社データの作成
         if ($publisher) {
             $publisherDto = $this->createPublisherUseCase->execute($publisher);
             $publisherId = $publisherDto->id;
         } else {
             $publisherId = null;
-        }
-
-        // 著者データの作成
-        if ($author) {
-            $authorDto = $this->createAuthorUseCase->execute($author);
-            $authorId = $authorDto->id;
-        } else {
-            $authorId = null;
         }
 
         // 本データの作成
@@ -74,10 +67,24 @@ class CreateBibliographyUseCase
         );
         $bookId = $bookDto->id;
 
-        // 著者と本データの紐付け
-        $this->createAuthorBookUseCase->execute(
-            $authorId,
+        // 著者データの作成と本-著者データの紐付け
+        if ($authors) {
+            foreach ($authors as $author) {
+                $authorDto = $this->createAuthorUseCase->execute($author);
+                $authorId = $authorDto->id;
+                $this->createAuthorBookUseCase->execute($authorId, $bookId);
+            }
+        }
+
+        return new BibliographyDto(
             $bookId,
+            $title,
+            $description,
+            $coverImageUrl,
+            $page,
+            $publishedDate,
+            $publisher,
+            $authors
         );
     }
 }
