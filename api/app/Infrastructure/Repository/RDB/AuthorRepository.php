@@ -12,6 +12,7 @@ class AuthorRepository implements AuthorRepositoryInterface
 {
     /**
      * @param AuthorEntity $authorEntity
+     *
      * @return AuthorDto
      */
     public function save(AuthorEntity $authorEntity): AuthorDto
@@ -26,19 +27,37 @@ class AuthorRepository implements AuthorRepositoryInterface
             $authorOrm->id,
             $authorOrm->name,
         );
+
+        return $reconstructedAuthorEntity->toDto();
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return AuthorDto
+     * @throws ModelNotFoundException
+     */
+    public function fetchById(int $id): AuthorDto
+    {
+        /** @var AuthorOrm $authorOrm */
+        $authorOrm = AuthorOrm::query()->findOrFail($id);
+        $reconstructedAuthorEntity = AuthorEntity::reconstructFromRepository($authorOrm->id, $authorOrm->name);
+
         return $reconstructedAuthorEntity->toDto();
     }
 
     /**
      * @param string $name
+     *
      * @return AuthorDto
      * @throws ModelNotFoundException
      */
-    public function getByName(string $name): AuthorDto
+    public function fetchByName(string $name): AuthorDto
     {
         /** @var AuthorOrm $authorOrm */
         $authorOrm = AuthorOrm::query()->where("name", $name)->firstOrFail();
         $reconstructedAuthorEntity = AuthorEntity::reconstructFromRepository($authorOrm->id, $authorOrm->name);
+
         return $reconstructedAuthorEntity->toDto();
     }
 }

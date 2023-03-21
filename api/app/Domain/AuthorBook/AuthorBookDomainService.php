@@ -20,7 +20,7 @@ class AuthorBookDomainService
     public function exists(AuthorBookEntity $authorBookEntity): bool
     {
         try {
-            $this->authorBookRepository->getByAuthorIdBookId(
+            $this->authorBookRepository->fetchByAuthorIdBookId(
                 $authorBookEntity->authorId,
                 $authorBookEntity->bookId
             );

@@ -5,5 +5,6 @@ namespace App\Domain\Publisher;
 interface PublisherRepositoryInterface
 {
     public function save(PublisherEntity $publisherEntity): PublisherDto;
-    public function getByName(string $name): PublisherDto;
+    public function fetchById(int $id): PublisherDto;
+    public function fetchByName(string $name): PublisherDto;
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\UseCase\UseCase\Publisher;
+namespace App\Application\UseCase\Publisher;
 
 use App\Domain\Publisher\PublisherDomainService;
 use App\Domain\Publisher\PublisherDto;
@@ -21,13 +21,16 @@ class CreatePublisherUseCase
     }
 
     /**
-     * @param PublisherEntity $publisherEntity
+     * @param string $publisher
+     *
      * @return PublisherDto
      */
-    public function execute(PublisherEntity $publisherEntity): PublisherDto
+    public function execute(string $publisher): PublisherDto
     {
+        $publisherEntity = PublisherEntity::constructNewInstance($publisher);
+
         if ($this->publisherDomainService->exists($publisherEntity)) {
-            return $this->publisherRepository->getByName($publisherEntity->name);
+            return $this->publisherRepository->fetchByName($publisherEntity->name);
         }
         return $this->publisherRepository->save($publisherEntity);
     }

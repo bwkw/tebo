@@ -10,6 +10,11 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class PublisherRepository implements PublisherRepositoryInterface
 {
+    /**
+     * @param PublisherEntity $publisherEntity
+     *
+     * @return PublisherDto
+     */
     public function save(PublisherEntity $publisherEntity): PublisherDto
     {
         /** @var PublisherOrm $publisherOrm */
@@ -22,15 +27,34 @@ class PublisherRepository implements PublisherRepositoryInterface
             $publisherOrm->id,
             $publisherOrm->name,
         );
+
+        return $reconstructedPublisherEntity->toDto();
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return PublisherDto
+     */
+    public function fetchById(int $id): PublisherDto
+    {
+        /** @var PublisherOrm $publisherOrm */
+        $publisherOrm = PublisherOrm::query()->findOrFail($id);
+        $reconstructedPublisherEntity = PublisherEntity::reconstructFromRepository(
+            $publisherOrm->id,
+            $publisherOrm->name,
+        );
+
         return $reconstructedPublisherEntity->toDto();
     }
 
     /**
      * @param string $name
+     *
      * @return PublisherDto
      * @throws ModelNotFoundException
      */
-    public function getByName(string $name): PublisherDto
+    public function fetchByName(string $name): PublisherDto
     {
         /** @var PublisherOrm $publisherOrm */
         $publisherOrm = PublisherOrm::query()->where("name", $name)->firstOrFail();
@@ -38,6 +62,7 @@ class PublisherRepository implements PublisherRepositoryInterface
             $publisherOrm->id,
             $publisherOrm->name,
         );
+
         return $reconstructedPublisherEntity->toDto();
     }
 }

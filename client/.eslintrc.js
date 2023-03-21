@@ -1,12 +1,6 @@
 module.exports = {
   root: true,
   extends: ['next/core-web-vitals', 'prettier', 'plugin:tailwindcss/recommended'],
-  overrides: [
-    {
-      files: ['*.ts', '*.tsx', '*.js'],
-      parser: '@typescript-eslint/parser',
-    },
-  ],
   rules: {
     'import/order': [
       'error',

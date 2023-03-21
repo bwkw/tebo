@@ -1,6 +1,6 @@
 <?php
 
-namespace App\UseCase\UseCase\Author;
+namespace App\Application\UseCase\Author;
 
 use App\Domain\Author\AuthorDomainService;
 use App\Domain\Author\AuthorDto;
@@ -21,13 +21,16 @@ class CreateAuthorUseCase
     }
 
     /**
-     * @param AuthorEntity $authorEntity
+     * @param string $author
+     *
      * @return AuthorDto
      */
-    public function execute(AuthorEntity $authorEntity): AuthorDto
+    public function execute(string $author): AuthorDto
     {
+        $authorEntity = AuthorEntity::constructNewInstance($author);
+
         if ($this->authorDomainService->exists($authorEntity)) {
-            return $this->authorRepository->getByName($authorEntity->name);
+            return $this->authorRepository->fetchByName($authorEntity->name);
         }
         return $this->authorRepository->save($authorEntity);
     }

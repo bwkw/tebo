@@ -20,7 +20,7 @@ class BookDomainService
     public function exists(BookEntity $bookEntity): bool
     {
         try {
-            $this->bookRepository->getByTitle($bookEntity->title);
+            $this->bookRepository->fetchByTitle($bookEntity->title);
             return true;
         } catch (ModelNotFoundException) {
             return false;

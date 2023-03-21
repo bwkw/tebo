@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Application\QueryServiceInterface\BibliographyQueryServiceInterface;
 use App\Domain\Author\AuthorRepositoryInterface;
 use App\Domain\AuthorBook\AuthorBookRepositoryInterface;
 use App\Domain\Book\BookRepositoryInterface;
 use App\Domain\Publisher\PublisherRepositoryInterface;
+use App\Infrastructure\QueryService\BibliographyQueryService;
 use App\Infrastructure\Repository\RDB\AuthorBookRepository;
 use App\Infrastructure\Repository\RDB\AuthorRepository;
 use App\Infrastructure\Repository\RDB\BookRepository;
@@ -37,6 +39,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             PublisherRepositoryInterface::class,
             PublisherRepository::class
+        );
+        $this->app->bind(
+            BibliographyQueryServiceInterface::class,
+            BibliographyQueryService::class
         );
     }
 

@@ -24,50 +24,48 @@ jobs:
 
       - name: Docker Compose Build and Up
         run: |
-          docker-compose build
-          docker-compose up -d
+          docker compose build
+          docker compose run client npm install
+          docker compose up -d
 
       - name: Docker Compose Process
-        run: docker-compose ps -a
+        run: docker compose ps -a
 
       - name: PHP, Composer Version
         run: |
-          docker-compose exec -T app php --version
-          docker-compose exec -T app composer --version
+          docker compose exec -T app php --version
+          docker compose exec -T app composer --version
 
       - name: Composer Install
-        run: docker-compose exec -T app composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-
-      - name: Composer Dump Autoload
-        run: docker-compose exec -T app composer dump-autoload
+        run: docker compose exec -T app composer install -q --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
 
       - name: Laravel Settings
         run: |
-          docker-compose exec -T app php artisan key:generate --env=testing
-          docker-compose exec -T app php artisan storage:link
+          docker compose exec -T app php artisan key:generate --env=testing
+          docker compose exec -T app php artisan storage:link
 
       - name: Npm Install
-        run: docker-compose exec -T　client npm install
+        run: docker compose exec -T client npm install
 
       - name: Laravel Version
-        run: docker-compose exec -T app php artisan --version
+        run: docker compose exec -T app php artisan --version
 
       - name: Laravel Format
-        run: docker-compose exec -T app composer phpcs
+        run: docker compose exec -T app composer phpcs
 
       - name: Next Format
-        run: docker-compose exec -T　client npm run lint
+        run: docker compose exec -T client npm run lint
 
       - name: Laravel Migrate
-        run: docker-compose exec -T app php artisan migrate --env=testing
+        run: docker compose exec -T app php artisan migrate --env=testing
 
       - name: Laravel Rollback
-        run: docker-compose exec -T app php artisan migrate:refresh --env=testing
+        run: docker compose exec -T app php artisan migrate:refresh --env=testing
 
       - name: Laravel Seeding
-        run: docker-compose exec -T app php artisan db:seed --env=testing
+        run: docker compose exec -T app php artisan db:seed --env=testing
 
       - name: Laravel Testing
         run: |
-          docker-compose exec -T app php artisan config:clear
-          docker-compose exec -T app php artisan test --parallel --env=testing
+          docker compose exec -T app php artisan config:clear
+          docker compose exec -T app php artisan test --parallel --env=testing

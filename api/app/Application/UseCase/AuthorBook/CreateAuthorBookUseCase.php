@@ -1,6 +1,6 @@
 <?php
 
-namespace App\UseCase\UseCase\AuthorBook;
+namespace App\Application\UseCase\AuthorBook;
 
 use App\Domain\AuthorBook\AuthorBookDomainService;
 use App\Domain\AuthorBook\AuthorBookDto;
@@ -21,13 +21,20 @@ class CreateAuthorBookUseCase
     }
 
     /**
-     * @param AuthorBookEntity $authorBookEntity
+     * @param int|null $authorId
+     * @param int $bookId
+     *
      * @return AuthorBookDto
      */
-    public function execute(AuthorBookEntity $authorBookEntity): AuthorBookDto
+    public function execute(?int $authorId, int $bookId): AuthorBookDto
     {
+        $authorBookEntity = AuthorBookEntity::constructNewInstance(
+            $authorId,
+            $bookId,
+        );
+
         if ($this->authorBookDomainService->exists($authorBookEntity)) {
-            return $this->authorBookRepository->getByAuthorIdBookId(
+            return $this->authorBookRepository->fetchByAuthorIdBookId(
                 $authorBookEntity->authorId,
                 $authorBookEntity->bookId,
             );

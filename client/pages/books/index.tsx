@@ -2,7 +2,7 @@ import { Grid, Text } from '@nextui-org/react'
 
 import type { GetServerSideProps, NextPage } from 'next'
 
-import { BookImageCard } from 'components/elements/Card/BookImageCard'
+import { BookImageCard } from 'features/book/components/BookImageCard'
 import { BookIndexType, FetchBookType } from 'features/book/types'
 import { axios } from 'libs/axios'
 
@@ -15,7 +15,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   }
 }
 
-const Book: NextPage<BookIndexType> = ({ books }) => {
+const Books: NextPage<BookIndexType> = ({ books }) => {
   return (
     <>
       <Text className='mb-6 text-center text-2xl font-bold text-white underline underline-offset-4'>本の一覧</Text>
@@ -32,4 +32,4 @@ const Book: NextPage<BookIndexType> = ({ books }) => {
   )
 }
 
-export default Book
+export default Books
