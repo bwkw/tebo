@@ -22,8 +22,8 @@ readonly class BibliographyDto
         string $coverImageUrl,
         int $page,
         CarbonImmutable $publishedDate,
-        string $publisher,
-        array $authors,
+        ?string $publisher,
+        ?array $authors,
     ) {
         $this->id = $id;
         $this->title = $title;

@@ -9,5 +9,5 @@ interface BibliographyQueryServiceInterface
     /**
      * @return BibliographyDto[]
      */
-    public function getAll(): array;
+    public function fetchAll(): array;
 }

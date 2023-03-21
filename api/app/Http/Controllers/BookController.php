@@ -10,7 +10,9 @@ class BookController extends Controller
 {
     public function fetchBooks(): AnonymousResourceCollection
     {
-        return BookResource::collection(BookOrm::all());
+        $bibliographies = $this->fetchBibliographiesUseCase->execute();
+
+        return response()->json(BibliographyResource::collection($bibliographies));
     }
 
     public function fetchBook(int $bookId): BookResource

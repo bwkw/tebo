@@ -9,13 +9,13 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property $id
  * @property $title
  * @property $description
- * @property $cover_image_url
+ * @property $coverImageUrl
  * @property $page
- * @property $published_date
- * @property $created_at
- * @property $updated_at
+ * @property $publishedDate
+ * @property $authors
+ * @property $publisher
  */
-class BookResource extends JsonResource
+class BibliographyResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -29,13 +29,11 @@ class BookResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'cover_image_url' => $this->cover_image_url,
+            'cover_image_url' => $this->coverImageUrl,
             'page' => $this->page,
-            'published_date' => $this->published_date,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'authors' => $this->authors->pluck('name'),
-            'publisher' => $this->publisher->name ?? null,
+            'published_date' => $this->publishedDate,
+            'authors' => $this->authors,
+            'publisher' => $this->publisher,
         ];
     }
 }
