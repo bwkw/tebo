@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Application\UseCase\Bibliography\CreateBibliographyUseCase;
-use App\Application\UseCase\Bibliography\FetchbibliographiesByGoogleBooksApiUseCase;
+use App\Application\UseCase\Bibliography\FetchBibliographiesByGoogleBooksApiUseCase
 use Illuminate\Console\Command;
 
 class CreateBooks extends Command
