@@ -30,7 +30,7 @@ class CreatePublisherUseCase
         $publisherEntity = PublisherEntity::constructNewInstance($publisher);
 
         if ($this->publisherDomainService->exists($publisherEntity)) {
-            return $this->publisherRepository->getByName($publisherEntity->name);
+            return $this->publisherRepository->fetchByName($publisherEntity->name);
         }
         return $this->publisherRepository->save($publisherEntity);
     }

@@ -12,6 +12,7 @@ class AuthorBookRepository implements AuthorBookRepositoryInterface
 {
     /**
      * @param AuthorBookEntity $authorBookEntity
+     *
      * @return AuthorBookDto
      */
     public function save(AuthorBookEntity $authorBookEntity): AuthorBookDto
@@ -28,16 +29,18 @@ class AuthorBookRepository implements AuthorBookRepositoryInterface
             $authorBookOrm->author_id,
             $authorBookOrm->book_id,
         );
+
         return $reconstructedAuthorBookEntity->toDto();
     }
 
     /**
      * @param int|null $authorId
      * @param int $bookId
+     *
      * @return AuthorBookDto
      * @throws ModelNotFoundException
      */
-    public function getByAuthorIdBookId(?int $authorId, int $bookId): AuthorBookDto
+    public function fetchByAuthorIdBookId(?int $authorId, int $bookId): AuthorBookDto
     {
         /** @var AuthorBookOrm $authorBookOrm */
         $authorBookOrm = AuthorBookOrm::query()->where([
@@ -49,6 +52,37 @@ class AuthorBookRepository implements AuthorBookRepositoryInterface
             $authorBookOrm->author_id,
             $authorBookOrm->book_id,
         );
+
         return $reconstructedAuthorBookEntity->toDto();
+    }
+
+    /**
+     * @param int $bookId
+     *
+     * @return AuthorBookDto[]|null
+     */
+    public function fetchByBookId(int $bookId): array|null
+    {
+        /** @var AuthorBookOrm $authorBookOrm */
+        $authorBookOrms = AuthorBookOrm::query()->where([
+            ["book_id", "=", $bookId],
+        ])->get();
+
+        if ($authorBookOrms->isEmpty()) {
+            return null;
+        }
+
+        $authorBookDtos = [];
+        foreach ($authorBookOrms as $authorBookOrm) {
+            $reconstructedAuthorBookEntity = AuthorBookEntity::reconstructFromRepository(
+                $authorBookOrm->id,
+                $authorBookOrm->author_id,
+                $authorBookOrm->book_id,
+            );
+            $authorBookDto = $reconstructedAuthorBookEntity->toDto();
+            $authorBookDtos[] = $authorBookDto;
+        }
+
+        return $authorBookDtos;
     }
 }

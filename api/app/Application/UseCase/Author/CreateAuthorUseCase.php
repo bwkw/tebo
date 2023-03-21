@@ -30,7 +30,7 @@ class CreateAuthorUseCase
         $authorEntity = AuthorEntity::constructNewInstance($author);
 
         if ($this->authorDomainService->exists($authorEntity)) {
-            return $this->authorRepository->getByName($authorEntity->name);
+            return $this->authorRepository->fetchByName($authorEntity->name);
         }
         return $this->authorRepository->save($authorEntity);
     }

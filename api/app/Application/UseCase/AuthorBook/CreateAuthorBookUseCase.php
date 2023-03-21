@@ -34,7 +34,7 @@ class CreateAuthorBookUseCase
         );
 
         if ($this->authorBookDomainService->exists($authorBookEntity)) {
-            return $this->authorBookRepository->getByAuthorIdBookId(
+            return $this->authorBookRepository->fetchByAuthorIdBookId(
                 $authorBookEntity->authorId,
                 $authorBookEntity->bookId,
             );

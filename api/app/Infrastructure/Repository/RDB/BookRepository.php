@@ -12,6 +12,7 @@ class BookRepository implements BookRepositoryInterface
 {
     /**
      * @param BookEntity $bookEntity
+     *
      * @return BookDto
      */
     public function save(BookEntity $bookEntity): BookDto
@@ -36,15 +37,17 @@ class BookRepository implements BookRepositoryInterface
             $bookOrm->published_date,
             $bookOrm->publisher_id,
         );
+
         return $reconstructedBookEntity->toDto();
     }
 
     /**
      * @param string $title
+     *
      * @return BookDto
      * @throws ModelNotFoundException
      */
-    public function getByTitle(string $title): BookDto
+    public function fetchByTitle(string $title): BookDto
     {
         /** @var BookOrm $bookOrm */
         $bookOrm = BookOrm::query()->where("title", $title)->firstOrFail();
@@ -57,6 +60,7 @@ class BookRepository implements BookRepositoryInterface
             $bookOrm->published_date,
             $bookOrm->publisher_id,
         );
+
         return $reconstructedBookEntity->toDto();
     }
 }
