@@ -30,4 +30,9 @@
     <rule ref="PSR1.Methods.CamelCapsMethodName.NotCamelCaps">
         <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
+
+<!--    Classをreadonlyにしたら副作用が発生してphpcsに怒られたので追加-->
+    <rule ref="PSR1.Files.SideEffects">
+        <exclude-pattern>**</exclude-pattern>
+    </rule>
 </ruleset>
