@@ -2,7 +2,9 @@ name: CI
 
 on:
   pull_request:
-    types: synchronize
+    types:
+      - opened
+      - synchronize
 
 jobs:
   run-ci:
